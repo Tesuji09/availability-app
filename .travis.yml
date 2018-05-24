@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy: availability
+  provider: heroku
+  api_key:
+    secure: raMTblOT/NSSJCMOSDHTMQA9t4z5BfBv/Dp8+VimQIg6A1dlTCiTtYWiEsJgreYgAFhFJ9+ww3oZb8WZ/T1q5OiiRtEswEDuhwQd8MMygSPqAKOo1JmC1wya/fWbgNPqmnHvVHrSE4e+kom+P+Ntb+o/p2X0s2+gbkOqA+lFzAevr/QnR3aAXLs2/ZdWoUIFnByEsVQGlc+WgMiFwT4nJBxZP3bHw135yqCP6yN4DKR/po+BPS9qiEeRpjzHjnS29ATAKJemZGa3DVn3CoExT1hEeq1wRT2lh1uGN5aLLJyyshP5RmE+H1y3bhzuqKkVA8hfb7Fi8HeAvwa6Fdw0JaYstgfcAqXC6Suua/7OX+hpXaolNwbZenHgoFlvhYZNY6LZGH3Mhpc90l9Se11ubcd4Gq52zwzffjNqSV9pxRzZC1rHsZ63Gnu9d8GBc6zqB7smM1r1YoZxfin5zrE8MWnli1EMt+D7qKlfsGY3xHVINKjcP42XUnJdY+ftufHfNc9Bbr4uFAu5SfL44fZkfmTcGdSIU5qHTj0TiUsEmJwmw83KZEuuOZNkIEphSb9Jb/2lcBoq2h/7UCzmA2P1VXof/BuxT75ivw9PSPoTWGMMJ0ONQHTknfXT6M14G+lV5bfVfkLkeFOhf5KJPi8/L/L0U4rcWLxpx7H5BAgLCs4=
+  app: availability
+  on:
+    repo: Tesuji09/availability-app
