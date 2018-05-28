@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const schema = mongoose.Schema({
   name: {type: String, required: true},
-  sunday: ,
-  monday: ,
-  tuesday: ,
-  wednesday: ,
-  thursday: ,
-  friday: ,
-  saturday: ,
+  sunday: {type: Number},
+  monday: {type: String},
+  tuesday: {type: String},
+  wednesday: {type: String},
+  thursday: {type: String},
+  friday: {type: String},
+  saturday: {type: String},
 });
