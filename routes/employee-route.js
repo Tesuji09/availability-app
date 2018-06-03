@@ -1,12 +1,12 @@
 const express = require('express')
-const router = express.router();
+const router = express.Router();
 const mongoose = require('mongoose');
 
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json()
 
-const storeAvail = require('../models/employee-model.js')
-app.use(express.static('../end-employee-page'))
+const storeAvail = require('../models/store-model.js')
+router.use(express.static('../end-employee-page'))
 
 
 module.exports = router;

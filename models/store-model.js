@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const storeSchema = mongoose.Schema({
+const StoreSchema = mongoose.Schema({
   manager: String,
   storeName: {type: String, required: true},
   employees: [{name: {type: String, required: true},
@@ -14,25 +14,25 @@ const storeSchema = mongoose.Schema({
   }]
 });
 
-storeSchema.methods.showStoreInfo(function(){
+StoreSchema.methods.showStoreInfo = function(){
   return {
-    manager: this.manager
+    manager: this.manager,
     storeName: this.storeName
   }
-});
+}
 
-storeSchema.methods.findEmployee(function(name){
+StoreSchema.methods.findEmployee = function(name){
   const employee = employees.forEach(function(employee){
     if (employee.name === name){
       return employee;
     }
   });
   return employee;
-});
+}
 
-storeSchema.methods.showAllEmployees(function(){
+StoreSchema.methods.showAllEmployees = function(){
   return this.employees
-});
+}
 
 
-const store = mogoose.model('store', storeSchema)
+const store = mongoose.model('store', StoreSchema)
