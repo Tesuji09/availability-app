@@ -8,7 +8,17 @@
     <title>Employee</title>
   </head>
   <body>
-    <table class="table table-striped">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="home-tab" href="#home" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="timeOff-tab" href="#timeOff" data-toggle="tab" role="tab" aria-controls="time off" aria-selected="false">Request Time Off</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">Name</th>
@@ -279,8 +289,15 @@
         </tr>
       </tbody>
     </table>
+      </div>
+      <div class="tab-pane fade" id="timeOff" role="tabpanel" aria-labelledby="time-tab">
+        <p> This is just some placholder text </p>
+      </div>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="employee.js">
   </body>
 </html>

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const StoreSchema = mongoose.Schema({
   manager: String,
   storeName: {type: String, required: true},
-  employees: [{name: {type: String, required: true},
+  employees: [{name: String,
     sunday: {type: Number, default: 0},
     monday: {type: Number, default: 0},
     tuesday: {type: Number, default: 0},
@@ -22,9 +22,10 @@ StoreSchema.methods.showStoreInfo = function(){
 }
 
 StoreSchema.methods.findEmployee = function(name){
-  const employee = employees.forEach(function(employee){
+  const employee;
+  employees.forEach(function(emp){
     if (employee.name === name){
-      return employee;
+      employee = employee.name;
     }
   });
   return employee;
