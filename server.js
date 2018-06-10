@@ -5,13 +5,11 @@ const passport = require('passport');
 
 const app = express();
 
-const employeeRoute = require('./routes/employee-route');
-const storeRoute = require('./routes/store-route')
+const userRoute = require('./routes/user-route')
 
 app.use(express.static('public'));
 
-app.use('/employee', employeeRoute);
-app.use('/store', storeRoute);
+app.use('/store', userRoute);
 
 
 app.listen(process.env.PORT || 8080);

@@ -9,9 +9,13 @@
   "author": "Joshua Zuo",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^2.0.1",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.2",
+    "mdbootstrap": "^4.5.4",
     "mocha": "^5.2.0",
     "mongoose": "^5.1.1",
     "morgan": "^1.9.0",
