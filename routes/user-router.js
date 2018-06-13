@@ -31,44 +31,24 @@ router.post('/employee', function(req, res) {
 })
 
 router.post('/admin', function(req, res, next) {
-  User.find({email: req.body.email})
-    .exec()
-    .then(user => {
-      if(user.length >= 1) {
-        return res.status(409).json({
-          message: 'email already exists'
-        });
-      } else {
-        bcrypt.hash(req.body.password, 10, function(err, hash) {
-            if(err) {
-              return res.status(500).json({
-                error: err
-              });
-            } else {
-              const user = new User({
-                _id: new mongoose.Types.ObjectId(),
-                email: req.body.email,
-                name: req.body.name,
-                //Role is true for Admin
-                role: true,
-                password: hash
-              });
-            }
-              user
-                .save()
-                .then(result => {
-                  console.log(result);
-                  res.status(201);
-                })
-                .catch(err =>{
-                  return res.status(500).json({
-                    error: err
-                  });
-                });
-          // No availability provided because the employee sets the availability
-        });
-      }
-    });
+  Promise.resolve()
+    .then(() => {
+      return User.find({email: req.body.email})
+    })
+    .then((users) => {
+      if(user.length >= 1) throw new Error('User already exist')
+
+      const user = new User();
+      Object.assign(user, req.body);
+      user.role = ['employee', 'manager'];
+      return user.save();
+    })
+    .then((user) => {
+      res.status(201).json(user);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err.toString() });
+    })
 })
 
 router.delete('/:id', function(req, res, next) {

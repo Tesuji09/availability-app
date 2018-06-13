@@ -1,5 +1,11 @@
-const MOCK_AVAIL = {
-  
+function getAvailability() {
+  $.ajax({
+    url: 'https://availability.herokuapp.com/login/employee'
+  })
+}
+
+function addAvailability() {
+
 }
 
 
