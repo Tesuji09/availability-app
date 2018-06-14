@@ -15,7 +15,7 @@ router.post('/employee', function(req, res) {
       return User.find({email: req.body.email})
     })
     .then((users) => {
-      if(user.length >= 1) throw new Error('User already exist')
+      if(users.length >= 1) throw new Error('User already exist')
 
       const user = new User();
       Object.assign(user, req.body);
@@ -70,8 +70,19 @@ router.delete('/:id', function(req, res, next) {
 router.put('/edit/:id', function(req, res, next) {
   Promise.resolve()
   .then(() => {
-    return User.findOneAndUpdate({_id: req.params.id}, {$set: req.body})
+    User.findOneAndUpdate({_id: req.params.id}, {$set: req.body})
   })
+  .then((user) => {
+      res.status(200).json({
+        message: 'user updated',
+        user: user
+      })
+  })
+  .catch((err) => {
+    res.status(500).json({ message: err.toString() });
+  });
 });
+
+router.put('/edit/password/:id')
 
 module.exports = router;

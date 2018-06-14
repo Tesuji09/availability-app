@@ -1,12 +1,22 @@
+require('dotenv').config();
+
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
+const path = require('path');
 
-const bodyParser = require('body-parser')
-const jsonParser = bodyParser.json();
-
-require('dotenv').config();
 const router = express.Router();
+
+router.use(bodyParser.json());
+
+const localAuth = passport.authenticate('local', {
+   session: false,
+   faiureRedirect: '../'
+ });
+ const jwtAuth = passport.authenticate('jwt', {session: false});
+
+
 
 const createAuthToken = function(user) {
   return jwt.sign({user}, process.env.JWT_SECRET, {
@@ -16,20 +26,17 @@ const createAuthToken = function(user) {
   });
 };
 
-const localAuth = passport.authenticate(
-  'local',
- {session: false});
-router.use(jsonParser);
-
 router.post('/', localAuth, (req, res) => {
   const authToken = createAuthToken({
-    name: req.user.name,
     email: req.user.email
   });
-  res.json({authToken});
+  res.redirect('/login/employee')
 });
 
-const jwtAuth = passport.authenticate('jwt', {session: false});
+router.get('/employee', (req, res) => {
+  console.log()
+  res.sendFile(path.join(__dirname, '../end-employee-page/employee.html'));
+});
 
 router.post('/refresh', jwtAuth, (req, res) => {
   const authToken = createAuthToken(req.user);

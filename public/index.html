@@ -9,13 +9,13 @@
     <title>Availability</title>
   </head>
   <body>
-    <div class="container d-flex">
-      <div class="row">
-        <div class="col-xs-8 border border-primary align-middle" >
-          <form class="login" action="/login" method="post">
-            <label>Username <input type="text" placeholder="username"></label></br>
-            <label>Password <input type="text" placeholder="Password"></label></br>
-            <input type="submit" value="Submit">
+    <div class="container-fluid h-100">
+      <div class="row h-75 mt-5">
+        <div class="col h-75 mt-5" >
+          <form class="login border border-primary w-25 h-75 d-flex flex-column mx-auto mt-5 justify-content-end pl-3 pr-3 pt-3 pb-0" method="post">
+            <label for="email" class="p-3">Email:</label><input id="email" class="p-1 ml-3 mr-3 mb-4" type="text" placeholder="username" name="email">
+            <label for="password" class="p-3">Password:</label> <input id="password" class="p-1 ml-3 mr-3 mb-5" type="text" placeholder="enter password" name="password">
+            <input class="p-3 ml-3 mt-4 mr-3 mb-3 " type="submit" value="Submit">
           </form>
         </div> <!-- col-xs-8 -->
       </div> <!-- row -->
@@ -23,5 +23,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="index.js"></script>
+
+    </script>
   </body>
 </html>

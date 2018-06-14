@@ -2,10 +2,16 @@ const {Strategy: LocalStrategy} = require('passport-local');
 
 const {Strategy: JwtStrategy, ExtractJwt} = require('passport-jwt');
 
-const {User} = require('../models/user');
-require('dotenv').config();
+const User = require('../models/user');
 
-const localStrategy = new LocalStrategy((email, password, callback) => {
+const localStrategy = new LocalStrategy(
+  {
+    usernameField: 'email',
+    session: false
+  },
+  (email, password, callback) => {
+    // return callback(null, { username: 'john', name: 'John Doe' })
+
   let user;
   User.findOne({email: email})
     .then(_user => {
@@ -25,6 +31,7 @@ const localStrategy = new LocalStrategy((email, password, callback) => {
           message: 'Incorrect username or password'
         });
       }
+      return callback(null, user);
     })
     .catch( err => {
       if(err.reason === 'LoginError') {
