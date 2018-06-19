@@ -25,6 +25,8 @@ const app = express();
 
 const userRouter = require('./routes/user-router');
 const loginRouter = require('./auth/router');
+const employee = require('./routes/employee');
+const store = require('./routes/store')
 
 app.use(bodyParser.json());
 app.use(morgan('common'));
@@ -33,9 +35,7 @@ app.use(express.static('public'));
 app.use('/login', loginRouter);
 app.use('/store', userRouter);
 
-app.get('/employee-page', (res, req) => {
-  res.sendFile(path.join(__dirname, '/end-employee-page/employee.html'));
-});
+
 
 
 app.listen(process.env.PORT || 8080);

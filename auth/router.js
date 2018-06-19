@@ -30,11 +30,10 @@ router.post('/', localAuth, (req, res) => {
   const authToken = createAuthToken({
     email: req.user.email
   });
-  res.redirect('/login/employee')
+  res.json({authToken, email: req.user.email});
 });
 
-router.get('/employee', (req, res) => {
-  console.log()
+router.get('/employee', jwtAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '../end-employee-page/employee.html'));
 });
 

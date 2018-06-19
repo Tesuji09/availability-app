@@ -7,14 +7,21 @@ function auth(e) {
   $.ajax('/login', {
     method: 'post',
     contentType: 'application/json',
-    data: JSON.stringify({ email, password })
-    success: function() {
-      winow.location.assign('/login/employee')
+    data: JSON.stringify({ email, password }),
+    success: function(data) {
+      localStorage.setItem('authToken', data.authToken);
+      localStorage.setItem('email', data.email);
+      $.ajax('/login/employee', {
+        method: 'get',
+        beforeSend: function(req) {
+          req.setRequestHeader("Bearer", data.authToken)
+        },
+        success: function(data) {
+
+        }
+      })
     }
-  }, (data) => {
-    return data;
   });
-  return true;
 }
 
 function submitLogin() {
