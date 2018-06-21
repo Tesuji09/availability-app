@@ -15,11 +15,22 @@ const schema = mongoose.Schema({
 
 });
 
+schema.methods.apiRep = function () {
+  const disallowedKeys = ['password']
+  const doc = this
+  const user = {}
+
+  Object.keys(doc).forEach(key => {
+    if (!disallowedKeys.find(key)) {
+      user[key] = doc[key]
+    }
+  })
+
+  return user
+}
+
 schema.methods.showStoreInfo = function(){
-  return {
-    manager: this.name,
-    availability: this.availability
-  }
+
 }
 
 schema.methods.validatePassword = function(password) {

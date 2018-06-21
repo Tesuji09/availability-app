@@ -23,7 +23,7 @@ passport.use(jwtStrategy);
 
 const app = express();
 
-const userRouter = require('./routes/user-router');
+const userRouter = require('./routes/user');
 const loginRouter = require('./auth/router');
 const employee = require('./routes/employee');
 const store = require('./routes/store')
@@ -33,7 +33,9 @@ app.use(morgan('common'));
 app.use(express.static('public'));
 
 app.use('/login', loginRouter);
-app.use('/store', userRouter);
+app.use('/createUser', userRouter);
+app.use('/employee', employee);
+app.use('/store', store)
 
 
 

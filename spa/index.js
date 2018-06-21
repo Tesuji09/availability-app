@@ -8,20 +8,39 @@ function auth(e) {
     method: 'post',
     contentType: 'application/json',
     data: JSON.stringify({ email, password }),
-    success: function(data) {
-      localStorage.setItem('authToken', data.authToken);
-      localStorage.setItem('email', data.email);
-      $.ajax('/login/employee', {
-        method: 'get',
-        beforeSend: function(req) {
-          req.setRequestHeader("Bearer", data.authToken)
-        },
-        success: function(data) {
-
-        }
-      })
+    success: (data) => {
+      storeJWT(data)
     }
   });
+}
+
+function storeJWT(data) {
+  localStorage.setItem('authToken', data.authToken);
+  localStorage.setItem('email', data.email);
+}
+
+function getUserData(req) {
+  const authToken = localStorage.getItem('authToken');
+  $.ajax('/login/employee', {
+    method: 'get',
+    beforeSend: function(req) {
+      req.setRequestHeader("Bearer", authToken)
+    },
+    success: function(data) {
+      if(data.includes('manager')){
+        showStorePage()
+      } else {
+        showEmployeePage()
+      }
+  });
+}
+
+function showStorePage() {
+
+}
+
+function showEmployeePage() {
+  
 }
 
 function submitLogin() {

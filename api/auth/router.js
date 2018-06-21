@@ -14,8 +14,6 @@ const localAuth = passport.authenticate('local', {
  });
  const jwtAuth = passport.authenticate('jwt', {session: false});
 
-
-
 const createAuthToken = function(user) {
   return jwt.sign({user}, process.env.JWT_SECRET, {
     subject: user.email,
@@ -28,11 +26,11 @@ router.post('/', localAuth, (req, res) => {
   const authToken = createAuthToken({
     email: req.user.email
   });
-  res.json({authToken, email: req.user.email});
-});
 
-router.get('/employee', jwtAuth, (req, res) => {
-  res.sendFile(path.join(__dirname, '../end-employee-page/employee.html'));
+  User.find( { email: req.user.email })
+    .then((doc) => {
+      res.json({ authToken, user: doc.apiRep() });
+    })
 });
 
 router.post('/refresh', jwtAuth, (req, res) => {
