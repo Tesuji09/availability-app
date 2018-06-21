@@ -19,7 +19,7 @@
 <body class="">
 
     <!--Main Navigation-->
-    <header hidden>
+    <header>
 
         <!-- Navbar -->
         <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
@@ -45,7 +45,7 @@
     <!-- Full Page Intro -->
 
         <!-- Content -->
-    <div class="container-fluid h-100 ">
+    <div class="container-fluid h-100" hidden>
 
       <!--Grid row-->
       <div class="row wow fadeIn h-75 d-flex justify-content-center align-items-center">
@@ -100,8 +100,8 @@
         <!-- Content -->
 
     <!--Main layout-->
-    <main class="mt-5 pt-5" hidden>
-        <div class="container">
+    <main class="mt-5 pt-5">
+        <div class="container-fluid">
 
             <!--Section: Jumbotron-->
             <section class="card wow fadeIn" id="intro">
@@ -110,23 +110,563 @@
                 <div class="card-body text-white text-center py-5 px-5 my-5">
 
                     <h1 class="mb-4">
-                        <strong>Learn Bootstrap 4 with MDB</strong>
+                        <strong>Welcome <i>insert username here</i>!</strong>
                     </h1>
                     <p>
-                        <strong>Best & free guide of responsive web design</strong>
+                        <strong>What is your availability?</strong>
                     </p>
-                    <p class="mb-4">
-                        <strong>The most comprehensive tutorial for the Bootstrap 4. Loved by over 500 000 users. Video and written
-                            versions available. Create your own, stunning website.</strong>
-                    </p>
-                    <a target="_blank" href="https://mdbootstrap.com/bootstrap-tutorial/" class="btn btn-outline-white btn-lg">Start free tutorial
-                        <i class="fa fa-graduation-cap ml-2"></i>
-                    </a>
+                    <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col">Sunday</th>
+                      <th scope="col">Monday</th>
+                      <th scope="col">Tuesday</th>
+                      <th scope="col">Wednesday</th>
+                      <th scope="col">Thursday</th>
+                      <th scope="col">Friday</th>
+                      <th scope="col">Saturday</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        Start
+                      </td>
+                      <td>
+                        <select class="form-control" id="sunStart">
+                          <option>Unavailable</option>
+                          <option value="0">6:00 AM</option>
+                          <option value="1">6:30 AM</option>
+                          <option value="2">7:00 AM</option>
+                          <option value="3">7:30 AM</option>
+                          <option value="4">8:00 AM</option>
+                          <option value="5">8:30 AM</option>
+                          <option value="6">9:00 AM</option>
+                          <option value="7">9:30 AM</option>
+                          <option value="8">10:00 AM</option>
+                          <option value="9">10:30 AM</option>
+                          <option value="10">11:00 AM</option>
+                          <option value="11">11:30 AM</option>
+                          <option value="12">12:00 PM</option>
+                          <option value="13">12:30 PM</option>
+                          <option value="14">1:00 PM</option>
+                          <option value="15">1:30 PM</option>
+                          <option value="16">2:00 PM</option>
+                          <option value="17">2:30 PM</option>
+                          <option value="18">3:00 PM</option>
+                          <option value="19">3:30 PM</option>
+                          <option value="20">4:00 PM</option>
+                          <option value="21">4:30 PM</option>
+                          <option value="22">5:00 PM</option>
+                          <option value="23">5:30 PM</option>
+                          <option value="24">6:00 PM</option>
+                          <option value="25">6:30 PM</option>
+                          <option value="26">7:00 PM</option>
+                          <option value="27">7:30 PM</option>
+                          <option value="28">8:30 PM</option>
+                          <option value="29">9:00 PM</option>
+                          <option value="30">9:30 PM</option>
+                          <option value="31">10:00 PM</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select class="form-control" id="monStart">
+                          <option>Unavailable</option>
+                          <option value="0">6:00 AM</option>
+                          <option value="1">6:30 AM</option>
+                          <option value="2">7:00 AM</option>
+                          <option value="3">7:30 AM</option>
+                          <option value="4">8:00 AM</option>
+                          <option value="5">8:30 AM</option>
+                          <option value="6">9:00 AM</option>
+                          <option value="7">9:30 AM</option>
+                          <option value="8">10:00 AM</option>
+                          <option value="9">10:30 AM</option>
+                          <option value="10">11:00 AM</option>
+                          <option value="11">11:30 AM</option>
+                          <option value="12">12:00 PM</option>
+                          <option value="13">12:30 PM</option>
+                          <option value="14">1:00 PM</option>
+                          <option value="15">1:30 PM</option>
+                          <option value="16">2:00 PM</option>
+                          <option value="17">2:30 PM</option>
+                          <option value="18">3:00 PM</option>
+                          <option value="19">3:30 PM</option>
+                          <option value="20">4:00 PM</option>
+                          <option value="21">4:30 PM</option>
+                          <option value="22">5:00 PM</option>
+                          <option value="23">5:30 PM</option>
+                          <option value="24">6:00 PM</option>
+                          <option value="25">6:30 PM</option>
+                          <option value="26">7:00 PM</option>
+                          <option value="27">7:30 PM</option>
+                          <option value="28">8:30 PM</option>
+                          <option value="29">9:00 PM</option>
+                          <option value="30">9:30 PM</option>
+                          <option value="31">10:00 PM</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select class="form-control" id="tueStart">
+                          <option>Unavailable</option>
+                          <option value="0">6:00 AM</option>
+                          <option value="1">6:30 AM</option>
+                          <option value="2">7:00 AM</option>
+                          <option value="3">7:30 AM</option>
+                          <option value="4">8:00 AM</option>
+                          <option value="5">8:30 AM</option>
+                          <option value="6">9:00 AM</option>
+                          <option value="7">9:30 AM</option>
+                          <option value="8">10:00 AM</option>
+                          <option value="9">10:30 AM</option>
+                          <option value="10">11:00 AM</option>
+                          <option value="11">11:30 AM</option>
+                          <option value="12">12:00 PM</option>
+                          <option value="13">12:30 PM</option>
+                          <option value="14">1:00 PM</option>
+                          <option value="15">1:30 PM</option>
+                          <option value="16">2:00 PM</option>
+                          <option value="17">2:30 PM</option>
+                          <option value="18">3:00 PM</option>
+                          <option value="19">3:30 PM</option>
+                          <option value="20">4:00 PM</option>
+                          <option value="21">4:30 PM</option>
+                          <option value="22">5:00 PM</option>
+                          <option value="23">5:30 PM</option>
+                          <option value="24">6:00 PM</option>
+                          <option value="25">6:30 PM</option>
+                          <option value="26">7:00 PM</option>
+                          <option value="27">7:30 PM</option>
+                          <option value="28">8:30 PM</option>
+                          <option value="29">9:00 PM</option>
+                          <option value="30">9:30 PM</option>
+                          <option value="31">10:00 PM</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select class="form-control" id="wedStart">
+                          <option>Unavailable</option>
+                          <option value="0">6:00 AM</option>
+                          <option value="1">6:30 AM</option>
+                          <option value="2">7:00 AM</option>
+                          <option value="3">7:30 AM</option>
+                          <option value="4">8:00 AM</option>
+                          <option value="5">8:30 AM</option>
+                          <option value="6">9:00 AM</option>
+                          <option value="7">9:30 AM</option>
+                          <option value="8">10:00 AM</option>
+                          <option value="9">10:30 AM</option>
+                          <option value="10">11:00 AM</option>
+                          <option value="11">11:30 AM</option>
+                          <option value="12">12:00 PM</option>
+                          <option value="13">12:30 PM</option>
+                          <option value="14">1:00 PM</option>
+                          <option value="15">1:30 PM</option>
+                          <option value="16">2:00 PM</option>
+                          <option value="17">2:30 PM</option>
+                          <option value="18">3:00 PM</option>
+                          <option value="19">3:30 PM</option>
+                          <option value="20">4:00 PM</option>
+                          <option value="21">4:30 PM</option>
+                          <option value="22">5:00 PM</option>
+                          <option value="23">5:30 PM</option>
+                          <option value="24">6:00 PM</option>
+                          <option value="25">6:30 PM</option>
+                          <option value="26">7:00 PM</option>
+                          <option value="27">7:30 PM</option>
+                          <option value="28">8:30 PM</option>
+                          <option value="29">9:00 PM</option>
+                          <option value="30">9:30 PM</option>
+                          <option value="31">10:00 PM</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select class="form-control" id="thuStart">
+                          <option>Unavailable</option>
+                          <option value="0">6:00 AM</option>
+                          <option value="1">6:30 AM</option>
+                          <option value="2">7:00 AM</option>
+                          <option value="3">7:30 AM</option>
+                          <option value="4">8:00 AM</option>
+                          <option value="5">8:30 AM</option>
+                          <option value="6">9:00 AM</option>
+                          <option value="7">9:30 AM</option>
+                          <option value="8">10:00 AM</option>
+                          <option value="9">10:30 AM</option>
+                          <option value="10">11:00 AM</option>
+                          <option value="11">11:30 AM</option>
+                          <option value="12">12:00 PM</option>
+                          <option value="13">12:30 PM</option>
+                          <option value="14">1:00 PM</option>
+                          <option value="15">1:30 PM</option>
+                          <option value="16">2:00 PM</option>
+                          <option value="17">2:30 PM</option>
+                          <option value="18">3:00 PM</option>
+                          <option value="19">3:30 PM</option>
+                          <option value="20">4:00 PM</option>
+                          <option value="21">4:30 PM</option>
+                          <option value="22">5:00 PM</option>
+                          <option value="23">5:30 PM</option>
+                          <option value="24">6:00 PM</option>
+                          <option value="25">6:30 PM</option>
+                          <option value="26">7:00 PM</option>
+                          <option value="27">7:30 PM</option>
+                          <option value="28">8:30 PM</option>
+                          <option value="29">9:00 PM</option>
+                          <option value="30">9:30 PM</option>
+                          <option value="31">10:00 PM</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select class="form-control" id="friStart">
+                          <option>Unavailable</option>
+                          <option value="0">6:00 AM</option>
+                          <option value="1">6:30 AM</option>
+                          <option value="2">7:00 AM</option>
+                          <option value="3">7:30 AM</option>
+                          <option value="4">8:00 AM</option>
+                          <option value="5">8:30 AM</option>
+                          <option value="6">9:00 AM</option>
+                          <option value="7">9:30 AM</option>
+                          <option value="8">10:00 AM</option>
+                          <option value="9">10:30 AM</option>
+                          <option value="10">11:00 AM</option>
+                          <option value="11">11:30 AM</option>
+                          <option value="12">12:00 PM</option>
+                          <option value="13">12:30 PM</option>
+                          <option value="14">1:00 PM</option>
+                          <option value="15">1:30 PM</option>
+                          <option value="16">2:00 PM</option>
+                          <option value="17">2:30 PM</option>
+                          <option value="18">3:00 PM</option>
+                          <option value="19">3:30 PM</option>
+                          <option value="20">4:00 PM</option>
+                          <option value="21">4:30 PM</option>
+                          <option value="22">5:00 PM</option>
+                          <option value="23">5:30 PM</option>
+                          <option value="24">6:00 PM</option>
+                          <option value="25">6:30 PM</option>
+                          <option value="26">7:00 PM</option>
+                          <option value="27">7:30 PM</option>
+                          <option value="28">8:30 PM</option>
+                          <option value="29">9:00 PM</option>
+                          <option value="30">9:30 PM</option>
+                          <option value="31">10:00 PM</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select class="form-control" id="satStart">
+                          <option>Unavailable</option>
+                          <option value="0">6:00 AM</option>
+                          <option value="1">6:30 AM</option>
+                          <option value="2">7:00 AM</option>
+                          <option value="3">7:30 AM</option>
+                          <option value="4">8:00 AM</option>
+                          <option value="5">8:30 AM</option>
+                          <option value="6">9:00 AM</option>
+                          <option value="7">9:30 AM</option>
+                          <option value="8">10:00 AM</option>
+                          <option value="9">10:30 AM</option>
+                          <option value="10">11:00 AM</option>
+                          <option value="11">11:30 AM</option>
+                          <option value="12">12:00 PM</option>
+                          <option value="13">12:30 PM</option>
+                          <option value="14">1:00 PM</option>
+                          <option value="15">1:30 PM</option>
+                          <option value="16">2:00 PM</option>
+                          <option value="17">2:30 PM</option>
+                          <option value="18">3:00 PM</option>
+                          <option value="19">3:30 PM</option>
+                          <option value="20">4:00 PM</option>
+                          <option value="21">4:30 PM</option>
+                          <option value="22">5:00 PM</option>
+                          <option value="23">5:30 PM</option>
+                          <option value="24">6:00 PM</option>
+                          <option value="25">6:30 PM</option>
+                          <option value="26">7:00 PM</option>
+                          <option value="27">7:30 PM</option>
+                          <option value="28">8:30 PM</option>
+                          <option value="29">9:00 PM</option>
+                          <option value="30">9:30 PM</option>
+                          <option value="31">10:00 PM</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        End
+                      </td>
+                      <td>
+                        <select class="form-control" id="sunEnd">
+                          <option>Unavailable</option>
+                          <option value="0">6:00 AM</option>
+                          <option value="1">6:30 AM</option>
+                          <option value="2">7:00 AM</option>
+                          <option value="3">7:30 AM</option>
+                          <option value="4">8:00 AM</option>
+                          <option value="5">8:30 AM</option>
+                          <option value="6">9:00 AM</option>
+                          <option value="7">9:30 AM</option>
+                          <option value="8">10:00 AM</option>
+                          <option value="9">10:30 AM</option>
+                          <option value="10">11:00 AM</option>
+                          <option value="11">11:30 AM</option>
+                          <option value="12">12:00 PM</option>
+                          <option value="13">12:30 PM</option>
+                          <option value="14">1:00 PM</option>
+                          <option value="15">1:30 PM</option>
+                          <option value="16">2:00 PM</option>
+                          <option value="17">2:30 PM</option>
+                          <option value="18">3:00 PM</option>
+                          <option value="19">3:30 PM</option>
+                          <option value="20">4:00 PM</option>
+                          <option value="21">4:30 PM</option>
+                          <option value="22">5:00 PM</option>
+                          <option value="23">5:30 PM</option>
+                          <option value="24">6:00 PM</option>
+                          <option value="25">6:30 PM</option>
+                          <option value="26">7:00 PM</option>
+                          <option value="27">7:30 PM</option>
+                          <option value="28">8:30 PM</option>
+                          <option value="29">9:00 PM</option>
+                          <option value="30">9:30 PM</option>
+                          <option value="31">10:00 PM</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select class="form-control" id="monEnd">
+                          <option>Unavailable</option>
+                          <option value="0">6:00 AM</option>
+                          <option value="1">6:30 AM</option>
+                          <option value="2">7:00 AM</option>
+                          <option value="3">7:30 AM</option>
+                          <option value="4">8:00 AM</option>
+                          <option value="5">8:30 AM</option>
+                          <option value="6">9:00 AM</option>
+                          <option value="7">9:30 AM</option>
+                          <option value="8">10:00 AM</option>
+                          <option value="9">10:30 AM</option>
+                          <option value="10">11:00 AM</option>
+                          <option value="11">11:30 AM</option>
+                          <option value="12">12:00 PM</option>
+                          <option value="13">12:30 PM</option>
+                          <option value="14">1:00 PM</option>
+                          <option value="15">1:30 PM</option>
+                          <option value="16">2:00 PM</option>
+                          <option value="17">2:30 PM</option>
+                          <option value="18">3:00 PM</option>
+                          <option value="19">3:30 PM</option>
+                          <option value="20">4:00 PM</option>
+                          <option value="21">4:30 PM</option>
+                          <option value="22">5:00 PM</option>
+                          <option value="23">5:30 PM</option>
+                          <option value="24">6:00 PM</option>
+                          <option value="25">6:30 PM</option>
+                          <option value="26">7:00 PM</option>
+                          <option value="27">7:30 PM</option>
+                          <option value="28">8:30 PM</option>
+                          <option value="29">9:00 PM</option>
+                          <option value="30">9:30 PM</option>
+                          <option value="31">10:00 PM</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select class="form-control" id="tueEnd">
+                          <option>Unavailable</option>
+                          <option value="0">6:00 AM</option>
+                          <option value="1">6:30 AM</option>
+                          <option value="2">7:00 AM</option>
+                          <option value="3">7:30 AM</option>
+                          <option value="4">8:00 AM</option>
+                          <option value="5">8:30 AM</option>
+                          <option value="6">9:00 AM</option>
+                          <option value="7">9:30 AM</option>
+                          <option value="8">10:00 AM</option>
+                          <option value="9">10:30 AM</option>
+                          <option value="10">11:00 AM</option>
+                          <option value="11">11:30 AM</option>
+                          <option value="12">12:00 PM</option>
+                          <option value="13">12:30 PM</option>
+                          <option value="14">1:00 PM</option>
+                          <option value="15">1:30 PM</option>
+                          <option value="16">2:00 PM</option>
+                          <option value="17">2:30 PM</option>
+                          <option value="18">3:00 PM</option>
+                          <option value="19">3:30 PM</option>
+                          <option value="20">4:00 PM</option>
+                          <option value="21">4:30 PM</option>
+                          <option value="22">5:00 PM</option>
+                          <option value="23">5:30 PM</option>
+                          <option value="24">6:00 PM</option>
+                          <option value="25">6:30 PM</option>
+                          <option value="26">7:00 PM</option>
+                          <option value="27">7:30 PM</option>
+                          <option value="28">8:30 PM</option>
+                          <option value="29">9:00 PM</option>
+                          <option value="30">9:30 PM</option>
+                          <option value="31">10:00 PM</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select class="form-control" id="wedEnd">
+                          <option>Unavailable</option>
+                          <option value="0">6:00 AM</option>
+                          <option value="1">6:30 AM</option>
+                          <option value="2">7:00 AM</option>
+                          <option value="3">7:30 AM</option>
+                          <option value="4">8:00 AM</option>
+                          <option value="5">8:30 AM</option>
+                          <option value="6">9:00 AM</option>
+                          <option value="7">9:30 AM</option>
+                          <option value="8">10:00 AM</option>
+                          <option value="9">10:30 AM</option>
+                          <option value="10">11:00 AM</option>
+                          <option value="11">11:30 AM</option>
+                          <option value="12">12:00 PM</option>
+                          <option value="13">12:30 PM</option>
+                          <option value="14">1:00 PM</option>
+                          <option value="15">1:30 PM</option>
+                          <option value="16">2:00 PM</option>
+                          <option value="17">2:30 PM</option>
+                          <option value="18">3:00 PM</option>
+                          <option value="19">3:30 PM</option>
+                          <option value="20">4:00 PM</option>
+                          <option value="21">4:30 PM</option>
+                          <option value="22">5:00 PM</option>
+                          <option value="23">5:30 PM</option>
+                          <option value="24">6:00 PM</option>
+                          <option value="25">6:30 PM</option>
+                          <option value="26">7:00 PM</option>
+                          <option value="27">7:30 PM</option>
+                          <option value="28">8:30 PM</option>
+                          <option value="29">9:00 PM</option>
+                          <option value="30">9:30 PM</option>
+                          <option value="31">10:00 PM</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select class="form-control" id="thuEnd">
+                          <option>Unavailable</option>
+                          <option value="0">6:00 AM</option>
+                          <option value="1">6:30 AM</option>
+                          <option value="2">7:00 AM</option>
+                          <option value="3">7:30 AM</option>
+                          <option value="4">8:00 AM</option>
+                          <option value="5">8:30 AM</option>
+                          <option value="6">9:00 AM</option>
+                          <option value="7">9:30 AM</option>
+                          <option value="8">10:00 AM</option>
+                          <option value="9">10:30 AM</option>
+                          <option value="10">11:00 AM</option>
+                          <option value="11">11:30 AM</option>
+                          <option value="12">12:00 PM</option>
+                          <option value="13">12:30 PM</option>
+                          <option value="14">1:00 PM</option>
+                          <option value="15">1:30 PM</option>
+                          <option value="16">2:00 PM</option>
+                          <option value="17">2:30 PM</option>
+                          <option value="18">3:00 PM</option>
+                          <option value="19">3:30 PM</option>
+                          <option value="20">4:00 PM</option>
+                          <option value="21">4:30 PM</option>
+                          <option value="22">5:00 PM</option>
+                          <option value="23">5:30 PM</option>
+                          <option value="24">6:00 PM</option>
+                          <option value="25">6:30 PM</option>
+                          <option value="26">7:00 PM</option>
+                          <option value="27">7:30 PM</option>
+                          <option value="28">8:30 PM</option>
+                          <option value="29">9:00 PM</option>
+                          <option value="30">9:30 PM</option>
+                          <option value="31">10:00 PM</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select class="form-control" id="fEnd">
+                          <option>Unavailable</option>
+                          <option value="0">6:00 AM</option>
+                          <option value="1">6:30 AM</option>
+                          <option value="2">7:00 AM</option>
+                          <option value="3">7:30 AM</option>
+                          <option value="4">8:00 AM</option>
+                          <option value="5">8:30 AM</option>
+                          <option value="6">9:00 AM</option>
+                          <option value="7">9:30 AM</option>
+                          <option value="8">10:00 AM</option>
+                          <option value="9">10:30 AM</option>
+                          <option value="10">11:00 AM</option>
+                          <option value="11">11:30 AM</option>
+                          <option value="12">12:00 PM</option>
+                          <option value="13">12:30 PM</option>
+                          <option value="14">1:00 PM</option>
+                          <option value="15">1:30 PM</option>
+                          <option value="16">2:00 PM</option>
+                          <option value="17">2:30 PM</option>
+                          <option value="18">3:00 PM</option>
+                          <option value="19">3:30 PM</option>
+                          <option value="20">4:00 PM</option>
+                          <option value="21">4:30 PM</option>
+                          <option value="22">5:00 PM</option>
+                          <option value="23">5:30 PM</option>
+                          <option value="24">6:00 PM</option>
+                          <option value="25">6:30 PM</option>
+                          <option value="26">7:00 PM</option>
+                          <option value="27">7:30 PM</option>
+                          <option value="28">8:30 PM</option>
+                          <option value="29">9:00 PM</option>
+                          <option value="30">9:30 PM</option>
+                          <option value="31">10:00 PM</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select class="form-control" id="SatEnd">
+                          <option>Unavailable</option>
+                          <option value="0">6:00 AM</option>
+                          <option value="1">6:30 AM</option>
+                          <option value="2">7:00 AM</option>
+                          <option value="3">7:30 AM</option>
+                          <option value="4">8:00 AM</option>
+                          <option value="5">8:30 AM</option>
+                          <option value="6">9:00 AM</option>
+                          <option value="7">9:30 AM</option>
+                          <option value="8">10:00 AM</option>
+                          <option value="9">10:30 AM</option>
+                          <option value="10">11:00 AM</option>
+                          <option value="11">11:30 AM</option>
+                          <option value="12">12:00 PM</option>
+                          <option value="13">12:30 PM</option>
+                          <option value="14">1:00 PM</option>
+                          <option value="15">1:30 PM</option>
+                          <option value="16">2:00 PM</option>
+                          <option value="17">2:30 PM</option>
+                          <option value="18">3:00 PM</option>
+                          <option value="19">3:30 PM</option>
+                          <option value="20">4:00 PM</option>
+                          <option value="21">4:30 PM</option>
+                          <option value="22">5:00 PM</option>
+                          <option value="23">5:30 PM</option>
+                          <option value="24">6:00 PM</option>
+                          <option value="25">6:30 PM</option>
+                          <option value="26">7:00 PM</option>
+                          <option value="27">7:30 PM</option>
+                          <option value="28">8:30 PM</option>
+                          <option value="29">9:00 PM</option>
+                          <option value="30">9:30 PM</option>
+                          <option value="31">10:00 PM</option>
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                    <button type="submit" class="btn btn-outline-white btn-lg">Save Availability
+                        <i class="fa fa-save ml-2"></i>
+                    </button>
 
                 </div>
                 <!-- Content -->
             </section>
-            <!--Section: Jumbotron-->
 
             <!--Section: Cards-->
 
@@ -137,10 +677,10 @@
     <!--Main layout-->
 
     <!--Footer-->
-    <footer class="page-footer text-center font-small mdb-color darken-2 mt-4 wow fadeIn" hidden>
+    <footer class="page-footer text-center font-small mdb-color darken-2 mt-4 wow fadeIn fixed-bottom">
 
         <!--Copyright-->
-        <div class="footer-copyright py-3 h-100">
+        <div class="footer-copyright py-3 h-100 ">
             © 2018 Copyright:
         </div>
         <!--/.Copyright-->
