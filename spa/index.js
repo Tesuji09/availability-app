@@ -9,6 +9,11 @@ function auth(e) {
     contentType: 'application/json',
     data: JSON.stringify({ email, password }),
     success: (data) => {
+      if(data.role.includes('manager')){
+        getStoreData()
+      } else {
+        getEmployeeData()
+      }
       storeJWT(data)
     }
   });
@@ -19,28 +24,43 @@ function storeJWT(data) {
   localStorage.setItem('email', data.email);
 }
 
-function getUserData(req) {
+function getEmployeeData() {
   const authToken = localStorage.getItem('authToken');
-  $.ajax('/login/employee', {
+  $.ajax('/employee', {
     method: 'get',
     beforeSend: function(req) {
       req.setRequestHeader("Bearer", authToken)
     },
-    success: function(data) {
-      if(data.includes('manager')){
-        showStorePage()
-      } else {
-        showEmployeePage()
+    success: data => {
+        showEmployeePage(data)
+  });
+}
+
+function getStoreData() {
+  const authToken = localStorage.getItem('authToken');
+  $.ajax('/store', {
+    method: 'get',
+    beforeSend: function(req) {
+      req.setRequestHeader("Bearer", authToken)
+    },
+    success: data => {
+      showStorePage(data)
       }
   });
 }
 
 function showStorePage() {
-
+  $('main').show()
+  $('header').show()
 }
 
-function showEmployeePage() {
-  
+function showEmployeePage(data) {
+  $('main').show();
+  displayUserData(data);
+}
+
+function displayUserData(data) {
+
 }
 
 function submitLogin() {
