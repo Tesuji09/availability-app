@@ -9,6 +9,7 @@ function auth(e) {
     contentType: 'application/json',
     data: JSON.stringify({ email, password }),
     success: (data) => {
+      console.log('first ajax request')
       if(data.role.includes('manager')){
         getStoreData()
       } else {
@@ -29,7 +30,7 @@ function getEmployeeData() {
   $.ajax('/employee', {
     method: 'get',
     beforeSend: function(req) {
-      req.setRequestHeader("Bearer", authToken)
+      req.setRequestHeader('Authorization', 'Bearer ' + authToken)
     },
     success: data => {
         showEmployeePage(data)
@@ -41,7 +42,8 @@ function getStoreData() {
   $.ajax('/store', {
     method: 'get',
     beforeSend: function(req) {
-      req.setRequestHeader("Bearer", authToken)
+      // req.setRequestHeader("Bearer", authToken)
+      req.setRequestHeader('Authorization', 'Bearer ' + authToken)
     },
     success: data => {
       showStorePage(data)
@@ -64,7 +66,7 @@ function displayUserData(data) {
 }
 
 function submitLogin() {
-  $('.login').submit(auth)
+  $('#login').submit(auth)
 }
 
 function login() {

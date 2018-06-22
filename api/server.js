@@ -30,7 +30,7 @@ const store = require('./routes/store')
 
 app.use(bodyParser.json());
 app.use(morgan('common'));
-app.use(express.static('public'));
+app.use(express.static('spa'));
 
 app.use('/login', loginRouter);
 app.use('/createUser', userRouter);
