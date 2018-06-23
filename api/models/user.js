@@ -9,7 +9,6 @@ const schema = mongoose.Schema({
     unique: true,
     match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/ },
   password: {type: String, required: true},
-// Role is going to be a boolean: true for manager, and false for employee
   role: {type: Array, required: true},
   availability: {type: Array, default: []},
 

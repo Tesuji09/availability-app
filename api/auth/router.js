@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const router = express.Router();
+const User = require('../models/user');
 
 router.use(bodyParser.json());
 
@@ -26,10 +27,13 @@ router.post('/', localAuth, (req, res) => {
   const authToken = createAuthToken({
     email: req.user.email
   });
-
-  User.find( { email: req.user.email })
+  console.log(req.user.email)
+  User.findOne({ email: req.user.email })
     .then((doc) => {
       res.json({ authToken, user: doc.apiRep() });
+    })
+    .catch(error=>{
+      res.json({error: 'Cannot find user'})
     })
 });
 
