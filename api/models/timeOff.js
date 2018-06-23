@@ -3,8 +3,8 @@ const mongoose = require('mongoose')
 const schema = mongoose.Schema({
   user: {type: String, required: true},
   allDay: {type: Boolean, required: true},
-  startTime: Number,
-  endTime: Number,
+  startTime: String,
+  endTime: String,
   status: {type: String, default: "pending"},
   acceptedBy: {type: String, default: 'None'}
 });

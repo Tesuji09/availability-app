@@ -115,10 +115,58 @@ function closeModal() {
   });
 }
 
+function formatDate() {
+  let today = new Date();
+  let dd = today.getDate()+1;
+
+  let mm = today.getMonth()+1;
+  let yyyy = today.getFullYear();
+  if(dd<10)
+  {
+      dd='0'+dd;
+  }
+
+  if(mm<10)
+  {
+      mm='0'+mm;
+  }
+  today = yyyy+'-'+mm+'-'+dd;
+  return today;
+}
+
+function setDate() {
+  $('#date').val(formatDate());
+  $('#date').attr('min', formatDate())
+  console.log(formatDate());
+}
+
+function sendRequest() {
+  $.ajax('/login', {
+    method: 'put',
+    contentType: 'application/json',
+    data: JSON.stringify({ email, password }),
+    success: (data) => {
+      console.log('first ajax request')
+      if(data.role.includes('manager')){
+        getStoreData()
+      } else {
+        getEmployeeData()
+      }
+      storeJWT(data)
+    }
+  });
+}
+
+function submitRequest() {
+  $('#submitRequest').click(e => {
+    sendRequest(e);
+  })
+}
+
 function login() {
   submitLogin();
-  closeModal();
-
+  setDate();
+  submitRequest()
 }
 
 $(login)

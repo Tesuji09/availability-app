@@ -26,7 +26,8 @@ const app = express();
 const userRouter = require('./routes/user');
 const loginRouter = require('./auth/router');
 const employee = require('./routes/employee');
-const store = require('./routes/store')
+const store = require('./routes/store');
+const request = require('./routes/timeOff');
 
 app.use(bodyParser.json());
 app.use(morgan('common'));
@@ -35,8 +36,8 @@ app.use(express.static('spa'));
 app.use('/login', loginRouter);
 app.use('/createUser', userRouter);
 app.use('/employee', employee);
-app.use('/store', store)
-
+app.use('/store', store);
+app.use('/request', request)
 let server;
 
 function runServer() {
