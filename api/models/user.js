@@ -28,10 +28,6 @@ schema.methods.apiRep = function () {
   return user
 }
 
-schema.methods.showStoreInfo = function(){
-
-}
-
 schema.methods.validatePassword = function(password) {
   return bcrypt.compare(password, this.password);
 }

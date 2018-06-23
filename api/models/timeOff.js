@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
 const schema = mongoose.Schema({
-  user: {type: String, required: true},
+  name: {type: String, required: true},
+  date: {type: String, required: true},
   allDay: {type: Boolean, required: true},
   startTime: String,
   endTime: String,
