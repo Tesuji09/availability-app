@@ -15,20 +15,24 @@ user:{
 }
 
 const mockRequestData = [
-  {name: 'Joshua Zuo',
-  date: 2018-07-18,
-  allDay: true,
-  startTime: "6:00 AM",
-  endTime: "10:00 PM",
-  status: 'accepted',
-  acceptedBy: 'Jim Bob'},
-  {name: 'Jenny Kim',
-  date: 2018-07-18,
-  allDay: false,
-  startTime: "6:00 AM",
-  endTime: "10:00 PM",
-  status: 'accepted',
-  acceptedBy: 'Styles Man'}
+  {
+    name: 'Joshua Zuo',
+    date: "2018-07-18",
+    allDay: true,
+    startTime: "6:00 AM",
+    endTime: "10:00 PM",
+    status: 'accepted',
+    acceptedBy: 'Jim Bob'
+  },
+  {
+    name: 'Jenny Kim',
+    date: "2018-07-18",
+    allDay: false,
+    startTime: "6:00 AM",
+    endTime: "10:00 PM",
+    status: 'pending',
+    acceptedBy: ''
+  }
 ]
 
 
@@ -91,15 +95,16 @@ function showStorePage() {
   $('header').show()
 }
 
-function showEmployeePage(data) {
+function showEmployeePage(data, rData) {
   console.log('goooooo')
   $('#go').hide();
   $('#main').show();
   $('header').show();
   displayEmployeeData(data);
+  displayRequestData(rData);
 }
 
-function displayEmployeeData(data) {
+function displayEmployeeData(data, rData) {
   $('#welcome').html(`<strong>Welcome ${data.user.name}!</strong>`);
   setEmployeeAvailability(data);
 }
@@ -107,7 +112,7 @@ function displayEmployeeData(data) {
 function submitLogin() {
   $('#login').click(e => {
     e.preventDefault();
-    showEmployeePage(mockData)
+    showEmployeePage(mockData, mockRequestData)
     // auth(e);
   })
 }
@@ -129,12 +134,6 @@ function setEmployeeAvailability(data) {
   $(`#satEnd option:contains("${data.user.availability[6].end}")`).prop('selected',true);
 }
 
-function closeModal() {
-  $('.close').click((e) => {
-    console.log('close button')
-    $('#makeRequest').modal('hide');
-  });
-}
 
 function currentDate() {
   let today = new Date();
@@ -175,6 +174,20 @@ function sendRequest(allDay, startTime, endTime) {
     success: (data) => {
     }
   });
+}
+
+function displayRequestData(rData) {
+  const requests = rData.map((request) => {
+    console.log(request);
+      return(`<tr>
+        <td>${request.name}</td>
+        <td>${request.date}</td>
+        <td>${request.startTime}, ${request.endTime}</td>
+        <td>${(request.status === 'accepted') ? request.acceptedBy : '<button type="button" class="btn btn-success">Cover Shift!</button> '}</td>
+      </tr>`)
+  });
+  console.log(requests)
+  $('#TORequests').html(requests);
 }
 
 function acceptRequest() {
