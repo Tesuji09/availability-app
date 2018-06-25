@@ -27,7 +27,6 @@ router.post('/', localAuth, (req, res) => {
   const authToken = createAuthToken({
     email: req.user.email
   });
-  console.log(`-${req.user.email}-`);
   User.findOne({ email: req.user.email })
     .then((doc) => {
       res.json({ authToken, user: doc.apiRep() });

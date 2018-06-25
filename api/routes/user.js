@@ -14,7 +14,7 @@ router.post('/employee', function(req, res) {
       return User.find({email: req.body.email})
     })
     .then((users) => {
-      if(users.length >= 1) return new Error('User already exist');
+      if(users.length >= 1) throw new Error('User already exist');
 
       const user = new User();
       Object.assign(user, req.body);

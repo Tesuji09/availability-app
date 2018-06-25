@@ -11,8 +11,8 @@ const timeOff = require('../models/timeOff.js');
 
  const jwtAuth = passport.authenticate('jwt', {session: false});
 
- router.get('/', jwtAuth,  (req, res) => {
-   console.log('We made it past the JWTAUTH!!!')
+ router.post('/',  (req, res) => {
+   User.find(req.header)
  })
 
 

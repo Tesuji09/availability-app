@@ -36,8 +36,7 @@ const mockRequestData = [
 ]
 
 
-function auth(e) {
-  e.preventDefault()
+function auth() {
   const email = $('#form3').val()
   const password = $('#form2').val()
   console.log({email, password})
@@ -46,42 +45,30 @@ function auth(e) {
     contentType: 'application/json',
     data: JSON.stringify({ email, password }),
     success: (data) => {
-      console.log('first ajax request')
+      console.log('first ajax request');
+      console.log(data);
+      storeJWT(data);
       if(data.user.role.includes('manager')){
         getStoreData()
       } else {
-        getEmployeeData()
+        showEmployeePage(data)
       }
-      storeJWT(data)
     }
   });
 }
 
 function storeJWT(data) {
-  localStorage.setItem('authToken', data.user.authToken);
+  localStorage.setItem('authToken', data.authToken);
   localStorage.setItem('email', data.user.email);
   localStorage.setItem('name', data.user.name)
 }
 
-function getEmployeeData() {
-  const authToken = localStorage.getItem('authToken');
-  $.ajax('/employee', {
-    method: 'get',
-    beforeSend: function(req) {
-      req.setRequestHeader('Authorization', 'Bearer ' + authToken)
-    },
-    success: data => {
-        showEmployeePage(data)
-      }
-    });
-}
 
 function getStoreData() {
   const authToken = localStorage.getItem('authToken');
   $.ajax('/store', {
     method: 'get',
     beforeSend: function(req) {
-      // req.setRequestHeader("Bearer", authToken)
       req.setRequestHeader('Authorization', 'Bearer ' + authToken)
     },
     success: data => {
@@ -101,19 +88,18 @@ function showEmployeePage(data, rData) {
   $('#main').show();
   $('header').show();
   displayEmployeeData(data);
-  displayRequestData(rData);
+  //displayRequestData(rData);
 }
 
 function displayEmployeeData(data, rData) {
   $('#welcome').html(`<strong>Welcome ${data.user.name}!</strong>`);
-  setEmployeeAvailability(data);
+  if(data.user.availability.length > 0) setEmployeeAvailability(data);
 }
 
 function submitLogin() {
   $('#login').click(e => {
     e.preventDefault();
-    showEmployeePage(mockData, mockRequestData)
-    // auth(e);
+    auth();
   })
 }
 function setEmployeeAvailability(data) {
@@ -160,15 +146,15 @@ function setDate() {
   console.log(currentDate());
 }
 
-function sendRequest(allDay, startTime, endTime) {
+function sendRequest(date, allDay, startTime, endTime) {
   const authToken = localStorage.getItem('authToken');
   const name = localStorage.getItem('name');
-  const request = allDay ? {name, allDay} : {name, startTime, endTime}
-  $.ajax('/login', {
+  const request = allDay ? {date, name, allDay} : {date, name, allDay, startTime, endTime}
+  $.ajax('/request', {
     method: 'post',
-    beforeSend: function(req) {
-      req.setRequestHeader('Authorization', 'Bearer ' + authToken)
-    },
+    // beforeSend: function(req) {
+    //   req.setRequestHeader('Authorization', 'Bearer ' + authToken)
+    // },
     contentType: 'application/json',
     data: JSON.stringify(request),
     success: (data) => {
@@ -195,11 +181,12 @@ function acceptRequest() {
 }
 
 function submitRequest() {
-  const date = $('#date').val();
-  const allDay = $('#allDay').prop('checked');
-  const startTime = $('#startTime').val();
-  const endTime = $('#endTime').val();
   $('#submitRequest').click(e => {
+    const date = $('#date').val();
+    const allDay = $('#allDay').prop('checked');
+    const startTime = $('#startTime').val();
+    const endTime = $('#endTime').val();
+    console.log(startTime)
     sendRequest(date, allDay, startTime, endTime);
   })
 }
