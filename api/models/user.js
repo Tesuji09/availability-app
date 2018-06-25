@@ -15,13 +15,13 @@ const schema = mongoose.Schema({
 });
 
 schema.methods.apiRep = function () {
-  const disallowedKeys = ['password']
-  const doc = this
+  const disallowedKeys = ['__v', 'password']
+  const obj = this.toObject()
   const user = {}
 
-  Object.keys(doc).forEach(key => {
-    if (!disallowedKeys.find(key)) {
-      user[key] = doc[key]
+  Object.keys(obj).forEach(key => {
+    if (!disallowedKeys.includes(key)) {
+      user[key] = obj[key]
     }
   })
 
@@ -43,6 +43,6 @@ schema.pre('save', function (next) {
   });
 })
 
-const model = mongoose.model('user', schema);
+const model = mongoose.model('User', schema);
 
 module.exports = model;
