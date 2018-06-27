@@ -10,7 +10,7 @@ user:{
       {start: '6:00 AM', end: '10:00 PM'},
       {start: '6:00 AM', end: '10:00 PM'},
       {start: '6:00 AM', end: '10:00 PM'},
-      {start: '6:00 AM', end: '10:00 PM'},
+      {start: '6:00 AM', end: '10:00 PM'}
   ]}
 }
 
@@ -49,7 +49,7 @@ function auth() {
       console.log(data);
       storeJWT(data);
       if(data.user.role.includes('manager')){
-        getStoreData()
+        getStorePage()
       } else {
         showEmployeePage(data)
       }
@@ -64,23 +64,6 @@ function storeJWT(data) {
 }
 
 
-function getStoreData() {
-  const authToken = localStorage.getItem('authToken');
-  $.ajax('/store', {
-    method: 'get',
-    beforeSend: function(req) {
-      req.setRequestHeader('Authorization', 'Bearer ' + authToken)
-    },
-    success: data => {
-      showStorePage(data)
-      }
-  });
-}
-
-function showStorePage() {
-  $('main').show()
-  $('header').show()
-}
 
 function showEmployeePage(data, rData) {
   console.log('goooooo')
@@ -88,7 +71,7 @@ function showEmployeePage(data, rData) {
   $('#main').show();
   $('header').show();
   displayEmployeeData(data);
-  //displayRequestData(rData);
+  displayRequestData(rData);
 }
 
 function displayEmployeeData(data, rData) {
@@ -99,7 +82,8 @@ function displayEmployeeData(data, rData) {
 function submitLogin() {
   $('#login').click(e => {
     e.preventDefault();
-    auth();
+    //auth();
+    showEmployeePage(mockData, mockRequestData)
   })
 }
 function setEmployeeAvailability(data) {
