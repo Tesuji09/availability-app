@@ -36,6 +36,8 @@ const mockRequestData = [
 ]
 
 
+
+
 function auth() {
   const email = $('#form3').val()
   const password = $('#form2').val()
@@ -83,7 +85,8 @@ function submitLogin() {
   $('#login').click(e => {
     e.preventDefault();
     //auth();
-    showEmployeePage(mockData, mockRequestData)
+    // showEmployeePage(mockData, mockRequestData)
+    showStorePage(mockStoreData)
   })
 }
 function setEmployeeAvailability(data) {

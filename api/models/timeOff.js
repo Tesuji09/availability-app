@@ -10,6 +10,6 @@ const schema = mongoose.Schema({
   acceptedBy: {type: String, default: 'None'}
 });
 
-const model = mongoose.model('model', schema);
+const request = mongoose.model('request', schema);
 
-module.exports = model
+module.exports = request
