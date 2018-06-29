@@ -32,7 +32,7 @@ const mockStoreData = [
 
 function showStorePage(data) {
   console.log('showstorepage')
-  showStoreData(mockStoreData);
+  showStoreData(data);
   $('#go').hide();
   $('main').show();
   $('header').show();
@@ -52,12 +52,14 @@ function addUser() {
 }
 
 function displayUser() {
+  $('#avail').append(e => {
 
+  })
 }
 
 
 function showStoreData(data) {
-  const html = data.map( user => {
+  const html = data.allUsers.map( user => {
   return(
     `<div class="col-lg-3 col-md-12 mb-4">
       <div class="card">

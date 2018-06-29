@@ -10,7 +10,15 @@ const schema = mongoose.Schema({
     match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/ },
   password: {type: String, required: true},
   role: {type: Array, required: true},
-  availability: {type: Array, default: []},
+  availability: {type: Array, default: [
+    {start: 'unavailable', end: 'unavailable'},
+    {start: 'unavailable', end: 'unavailable'},
+    {start: 'unavailable', end: 'unavailable'},
+    {start: 'unavailable', end: 'unavailable'},
+    {start: 'unavailable', end: 'unavailable'},
+    {start: 'unavailable', end: 'unavailable'},
+    {start: 'unavailable', end: 'unavailable'},
+  ]},
 
 });
 

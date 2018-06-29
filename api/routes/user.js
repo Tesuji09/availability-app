@@ -70,10 +70,10 @@ router.delete('/:id', function(req, res, next) {
     });
 });
 
-router.put('/edit/:id', function(req, res, next) {
+router.put('/edit', function(req, res, next) {
   Promise.resolve()
   .then(() => {
-    User.findOneAndUpdate({_id: req.params.id}, {$set: req.body})
+    User.findOneAndUpdate({_id: req.body.id}, {$set: req.body})
   })
   .then((user) => {
       res.status(200).json({

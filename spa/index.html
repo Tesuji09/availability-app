@@ -44,7 +44,7 @@
   <!--Main Navigation-->
   <!-- Login Page -->
 
-  <div class="container-fluid h-100" id="go">
+  <div class="container-fluid" id="go">
 
     <!--Grid row-->
     <div class="row wow fadeIn h-75 d-flex justify-content-center align-items-center">
@@ -104,7 +104,7 @@
     <!--Section: Jumbotron-->
       <div class="card wow fadeIn" id="intro">
         <!-- Head -->
-        <div class="card-body text-white text-center py-5 px-5 my-5">
+        <div class="card-body text-white text-center py-3 px-5 my-3">
 
             <h1 class="mb-4" id="welcome">
                 <strong>Welcome <i>insert username here</i>!</strong>
@@ -756,7 +756,7 @@
 <div class="container">
 
                   <!--Section: Time Off Requests-->
-                  <section class="mt-5 wow fadeIn">
+                  <section class="mt-3 wow fadeIn">
 
                     <!--Grid row-->
                     <div class="row d-flex justify-content-center">
@@ -803,7 +803,7 @@
               <div class="modal-content">
                   <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">Request Time Off</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <button type="button" id="closeRequest" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                       </button>
                   </div>
@@ -815,7 +815,7 @@
                         <input type="checkbox" id="allDay"><br>
                         <label for="startTime" class="mt-2"> Start Time</label>
                         <select class="form-control" id="startTime">
-                          <option>Unavailable</option>
+                          <option>N/A</option>
                           <option >6:00 AM</option>
                           <option >6:30 AM</option>
                           <option >7:00 AM</option>
@@ -851,7 +851,7 @@
                         </select>
                         <label for="endTime" class="mt-2"> End Time</label>
                         <select class="form-control" id="endTime">
-                          <option>Unavailable</option>
+                          <option>N/A</option>
                           <option >6:00 AM</option>
                           <option >6:30 AM</option>
                           <option >7:00 AM</option>
@@ -888,8 +888,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="submitRequest">submit</button>
+                        <button type="button" class="btn btn-secondary">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitRequest">Submit</button>
                     </div>
                   </form>
               </div>

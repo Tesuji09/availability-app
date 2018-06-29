@@ -39,7 +39,7 @@ const mockRequestData = [
 
 
 function auth() {
-  const email = $('#form3').val()
+  const email = $('#form1').val()
   const password = $('#form2').val()
   console.log({email, password})
   $.ajax('/login', {
@@ -51,10 +51,25 @@ function auth() {
       console.log(data);
       storeJWT(data);
       if(data.user.role.includes('manager')){
-        getStorePage()
+        showStorePage(data);
+        getRequestData();
       } else {
-        showEmployeePage(data)
+        showEmployeePage(data);
+        getRequestData();
       }
+    }
+  });
+}
+
+function getRequestData() {
+  const authToken = localStorage.getItem('authToken')
+  $.ajax('/request', {
+    method: 'get',
+    beforeSend: function(req) {
+      req.setRequestHeader('Authorization', 'Bearer ' + authToken)
+    },
+    success: (data) => {
+        displayRequestData(data);
     }
   });
 }
@@ -68,16 +83,15 @@ function storeJWT(data) {
 
 
 
-function showEmployeePage(data, rData) {
+function showEmployeePage(data) {
   console.log('goooooo')
   $('#go').hide();
   $('#main').show();
   $('header').show();
   displayEmployeeData(data);
-  displayRequestData(rData);
 }
 
-function displayEmployeeData(data, rData) {
+function displayEmployeeData(data) {
   $('#welcome').html(`<strong>Welcome ${data.user.name}!</strong>`);
   if(data.user.availability.length > 0) setEmployeeAvailability(data);
 }
@@ -85,9 +99,9 @@ function displayEmployeeData(data, rData) {
 function submitLogin() {
   $('#login').click(e => {
     e.preventDefault();
-    //auth();
+    auth();
     // showEmployeePage(mockData, mockRequestData)
-    showStorePage(mockStoreData)
+    // showStorePage(mockStoreData)
   })
 }
 function setEmployeeAvailability(data) {
@@ -140,9 +154,9 @@ function sendRequest(date, allDay, startTime, endTime) {
   const request = allDay ? {date, name, allDay} : {date, name, allDay, startTime, endTime}
   $.ajax('/request', {
     method: 'post',
-    // beforeSend: function(req) {
-    //   req.setRequestHeader('Authorization', 'Bearer ' + authToken)
-    // },
+    beforeSend: function(req) {
+      req.setRequestHeader('Authorization', 'Bearer ' + authToken)
+    },
     contentType: 'application/json',
     data: JSON.stringify(request),
     success: (data) => {
@@ -151,7 +165,8 @@ function sendRequest(date, allDay, startTime, endTime) {
 }
 
 function displayRequestData(rData) {
-  const requests = rData.map((request) => {
+  if(rData.length > 0) {
+    const requests = rData.map((request) => {
     console.log(request);
       return(`<tr>
         <td>${request.name}</td>
@@ -162,10 +177,23 @@ function displayRequestData(rData) {
   });
   console.log(requests)
   $('#TORequests').html(requests);
+  }
 }
 
 function acceptRequest() {
-
+  const authToken = localStorage.getItem('authToken');
+  const id = localStorage.getItem('id')
+  const name = localStorage.getItem('name')
+  $.ajax('/request', {
+    method: 'put',
+    beforeSend: function(req) {
+      req.setRequestHeader('Authorization', 'Bearer ' + authToken)
+    },
+    contentType: 'application/json',
+    data: JSON.stringify({ acceptedby: name, status: accepted }),
+    success: (data) => {
+    }
+  });
 }
 
 function submitRequest() {
@@ -176,13 +204,77 @@ function submitRequest() {
     const endTime = $('#endTime').val();
     console.log(startTime)
     sendRequest(date, allDay, startTime, endTime);
+    clearRequestForm();
+  })
+}
+
+function closeRequestForm() {
+  $('#makeRequest').on('hidden.bs.modal', e => clearRequestForm())
+}
+
+function toggleAllDay() {
+  $('#allDay').change(e => {
+    if ($('#allDay').prop('checked')) {
+      console.log($('#allDay').prop('checked'))
+      $('#startTime option:contains("N/A")').prop('selected', true);
+      $('#startTime').attr('disabled', true);
+      $('#endTime option:contains("N/A")').prop('selected', true);
+      $('#endTime').attr('disabled', true);
+    } else {
+      $('#startTime').attr('disabled', false);
+      $('#endTime').attr('disabled', false);
+    }
+  })
+}
+
+function clearRequestForm() {
+  $('#date').val($('#date').defaultValue)
+  $('#allDay').prop('checked', false)
+  $('#startTime option:contains("N/A")').prop('selected', true);
+  $('#endTime option:contains("N/A")').prop('selected', true);
+}
+
+
+function saveEmployeeAvailability() {
+  const authToken = localStorage.getItem('authToken');
+  const id = localStorage.getItem('id');
+  $('#saveAvail').click((e) => {
+    function availabilityData() {
+      return ([
+        {start: $('#sunStart option:selected').val(), end: $('#sunEnd option:selected').val()},
+        {start: $('#monStart option:selected').val(), end: $('#monEnd option:selected').val()},
+        {start: $('#tueStart option:selected').val(), end: $('#tueEnd option:selected').val()},
+        {start: $('#wedStart option:selected').val(), end: $('#wedEnd option:selected').val()},
+        {start: $('#thuStart option:selected').val(), end: $('#thuEnd option:selected').val()},
+        {start: $('#friStart option:selected').val(), end: $('#friEnd option:selected').val()},
+        {start: $('#satStart option:selected').val(), end: $('#satEnd option:selected').val()}
+      ])
+    }
+    const newData = {
+      id,
+      availability: availabilityData()
+    }
+      $.ajax('/user/edit/availability', {
+      method: 'put',
+      beforeSend: function(req) {
+        req.setRequestHeader('Authorization', 'Bearer ' + authToken)
+      },
+      contentType: 'application/json',
+      data: JSON.stringify(newData),
+      success: (data) => {
+        console.log(newData.availability)
+      }
+    });
   })
 }
 
 function login() {
   submitLogin();
   setDate();
-  submitRequest()
+  submitRequest();
+  toggleAllDay();
+  saveEmployeeAvailability();
+  closeRequestForm();
 }
 
 $(login)

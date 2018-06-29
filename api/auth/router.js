@@ -27,14 +27,29 @@ router.post('/', localAuth, (req, res) => {
   const authToken = createAuthToken({
     email: req.user.email
   });
+  let currentUser
   User.findOne({ email: req.user.email })
     .then((doc) => {
-      res.json({ authToken, user: doc.apiRep() });
+      currentUser = doc
+      console.log(doc.role)
+      if(!doc.role.includes('manager')) {
+        res.json({ authToken, user: doc.apiRep() });
+      } else {
+        User.find()
+        .then(allUsers=> {
+          console.log(allUsers);
+          res.json({authToken, user: currentUser.apiRep(), allUsers});
+        })
+        .catch(error => {
+          console.error(error);
+          res.json({error});
+        })
+      }
     })
     .catch(error => {
       console.error(error)
       res.json({error: 'Cannot find user'})
-    })
+    });
 });
 
 router.post('/refresh', jwtAuth, (req, res) => {

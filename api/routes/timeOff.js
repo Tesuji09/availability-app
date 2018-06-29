@@ -10,7 +10,7 @@ const Request = require('../models/timeOff.js')
 
  const jwtAuth = passport.authenticate('jwt', {session: false});
 
-router.post('/',(req, res) => {
+router.post('/', jwtAuth, (req, res) => {
 // console.log('employee-post')
 // res.json({message: 'we made it into the employee post method'})
   Promise.resolve()
@@ -27,6 +27,12 @@ router.post('/',(req, res) => {
     console.error(error)
     res.status(500).json({message: 'data uploaded'})
   })
+})
+
+router.get('/', jwtAuth, (req, res) => {
+  Request.find()
+  .then(requests => { res.status(200).json({requests}) })
+  .catch(error => { res.status(500).json({error}) });
 })
 
 router.put('/', (req, res) => {

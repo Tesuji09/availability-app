@@ -19,11 +19,11 @@ describe('Availability', () => {
       return runServer();
     });
 
-    before(function(){
-      return chai.request(app)
-      .post('/user/employee')
-      .send(newUser)
-    })
+    // before(function(){
+    //   return chai.request(app)
+    //   .post('/user/employee')
+    //   .send(newUser)
+    // })
 
     after(function() {
       return closeServer();
@@ -40,55 +40,55 @@ describe('Availability', () => {
         const expectedKeys = ['name', 'password', 'email', 'availability', 'role'];
         expect(res).to.include.keys(expectedKeys)
       });
-    });
-    it('should return an error when trying to create a repeat user', function() {
-      return chai.request(app)
-      .post('/user/employee')
-      .send(newUser)
-      .then(function(res) {
-        return chai.request(app)
-        .post('/user/employee')
-        .send(newUser)
-        .then(function(res){
-          expect(res).to.have.status(500)
-        })
-      });
-    });
-    it('should delete an existing employee', function () {
-      return chai.request(app)
-      .post('/user/employee')
-      .send(newUser)
-      .then(function(res) {
-        expect(res).to.have.status(201);
-        expect(res).to.be.json;
-        expect(res.body).to.be.a('object');
-        return chai.request(app)
-        .get('/employee')
-        .then(function(res) {
-            return chai.request(app)
-            .delete(`user/${res.body.id}`)
-        })
-        .then(function(res) {
-          expect(res).to.have.status(204);
-        });
-      });
-    });
-    it('should edit a user', function () {
-      return chai.request(app)
-      .get()
     })
-  });
-  describe('timeOff', function() {
-    before(function() {
-      return runServer();
-    });
-
-    after(function() {
-      return closeServer();
-    });
-    it('should create a request', function () {
-      return chai.request(app)
-      .post()
-    })
+  //   it('should return an error when trying to create a repeat user', function() {
+  //     return chai.request(app)
+  //     .post('/user/employee')
+  //     .send(newUser)
+  //     .then(function(res) {
+  //       return chai.request(app)
+  //       .post('/user/employee')
+  //       .send(newUser)
+  //       .then(function(res){
+  //         expect(res).to.have.status(500)
+  //       })
+  //     });
+  //   });
+  //   it('should delete an existing employee', function () {
+  //     return chai.request(app)
+  //     .post('/user/employee')
+  //     .send(newUser)
+  //     .then(function(res) {
+  //       expect(res).to.have.status(201);
+  //       expect(res).to.be.json;
+  //       expect(res.body).to.be.a('object');
+  //       return chai.request(app)
+  //       .get('/employee')
+  //       .then(function(res) {
+  //           return chai.request(app)
+  //           .delete(`user/${res.body.id}`)
+  //       })
+  //       .then(function(res) {
+  //         expect(res).to.have.status(204);
+  //       });
+  //     });
+  //   });
+  //   it('should edit a user', function () {
+  //     return chai.request(app)
+  //     .get()
+  //   })
+  // });
+  // describe('timeOff', function() {
+  //   before(function() {
+  //     return runServer();
+  //   });
+  //
+  //   after(function() {
+  //     return closeServer();
+  //   });
+  //   it('should create a request', function () {
+  //     return chai.request(app)
+  //     .post()
+  //   })
   });
 });
