@@ -63,6 +63,7 @@ function storeJWT(data) {
   localStorage.setItem('authToken', data.authToken);
   localStorage.setItem('email', data.user.email);
   localStorage.setItem('name', data.user.name)
+  localStorage.setItem('id', data.user._id)
 }
 
 

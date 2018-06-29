@@ -3,12 +3,16 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
 
 const bodyParser = require('body-parser');
 
 const User = require('../models/user.js')
+const jwtAuth = passport.authenticate('jwt', {session: false});
 
-router.post('/employee', function(req, res) {
+
+router.post('/employee', jwtAuth, function(req, res) {
+  console.log('employee endpoint')
   Promise.resolve()
     .then(() => {
       return User.find({email: req.body.email})
@@ -81,6 +85,30 @@ router.put('/edit/:id', function(req, res, next) {
     res.status(500).json({ message: err.toString() });
   });
 });
+
+router.get('/store', jwtAuth, (req, res) => {
+  User.find()
+  .then((users) => {
+    const rep = users.map(user => user.apiRep())
+    console.log(rep)
+    res.json({users:rep})
+  })
+  .catch(error => {
+    res.status(500).json({ error })
+  });
+});
+
+// router.get('/employee', (req, res) => {
+//   User.findOne({_id: req.headers.email.})
+//   .then((users) => {
+//     const rep = users.map(user => user.apiRep())
+//     console.log(rep)
+//     res.json({users:rep})
+//   })
+//   .catch(error => {
+//     res.status(500).json({ error })
+//   });
+// });
 
 router.put('/edit/password/:id')
 

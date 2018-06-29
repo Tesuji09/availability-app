@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const path = require('path');
+// const User = require('models/user.js')
 // const router = express.Router();
 
 const {router: AuthRouter, localStrategy, jwtStrategy} = require('./auth')
@@ -25,8 +26,6 @@ const app = express();
 
 const userRouter = require('./routes/user');
 const loginRouter = require('./auth/router');
-const employee = require('./routes/employee');
-const store = require('./routes/store');
 const request = require('./routes/timeOff');
 
 app.use(bodyParser.json());
@@ -34,9 +33,7 @@ app.use(morgan('common'));
 app.use(express.static('spa'));
 
 app.use('/login', loginRouter);
-app.use('/createUser', userRouter);
-app.use('/employee', employee);
-app.use('/store', store);
+app.use('/user', userRouter);
 app.use('/request', request)
 let server;
 
@@ -49,7 +46,19 @@ function runServer() {
     }).on('error', err => {
       reject(err)
     });
-  });
+  })
+  // .then(() => {
+  //   const newUser = {
+  //     name: 'josh',
+  //     email: 'josh@yahoo.com',
+  //     password: '123'
+  //
+  //   }
+  //   const user = new User();
+  //   Object.assign(user, newUser);
+  //   user.role = ['employee'];
+  //   return user.save();
+  // });
 }
 
 function closeServer() {

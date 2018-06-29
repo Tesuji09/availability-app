@@ -40,10 +40,10 @@ const localStrategy = new LocalStrategy(
       return callback(err, false);
     });
 });
-
+console.log(process.env.JWT_SECRET)
 const jwtStrategy = new JwtStrategy(
   {
-  secretOrKey: {JWT_SECRET: process.env.JWT_SECRET},
+  secretOrKey: process.env.JWT_SECRET,
   jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
   algorithms: ['HS256']
   },
