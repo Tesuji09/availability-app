@@ -43,6 +43,7 @@ function showStorePage(data) {
   );
   $('#saveAvail').remove()
   addUser();
+  deleteUser();
 }
 
 function addUser() {
@@ -64,7 +65,8 @@ function addUser() {
         console.log(data);
         displayUser(data);
       }
-    });
+   });
+    displayUser();
   });
 }
 
@@ -82,37 +84,39 @@ function clearEmpForm() {
 
 function displayUser(user) {
   $('#avail').append(e => {
-    return (`<div class="col-lg-3 col-md-12 mb-4">
-      <div class="card">
-        <div class="card-header">
-          <h4 class="btn btn-in w-100 text-muted" data-toggle="collapse" data-target="#${user.name.replace(/\s+/g, '')}Info" aria-expanded="false" aria-controls="${user.name.replace(/\s+/g, '')}Info">
-            <strong>${user.name}</strong>
-          </h4>
+    return(
+      `<div class="col-lg-3 col-md-12 mb-4" data-id="${user._id}" id="${user._id}">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="btn btn-in w-100 text-muted" data-toggle="collapse" data-target="#${user.name.replace(/\s+/g, '')}Info" aria-expanded="false" aria-controls="${user.name.replace(/\s+/g, '')}Info">
+              <strong>${user.name}</strong>
+            </h4>
+          </div>
+          <div class="collapse" id="${user.name.replace(/\s+/g, '')}Info">
+          <div class="card-body text-muted">
+            <section><h6>Sunday</h6> <p>${(user.availability[0].start !== 'unavailable') ? 'Start: ' + user.availability[0].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
+            <section><h6>Monday</h6> <p>${(user.availability[1].start !== 'unavailable') ? 'Start: ' + user.availability[1].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
+            <section><h6>Tuesday</h6> <p>${(user.availability[2].start !== 'unavailable') ? 'Start: ' + user.availability[2].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
+            <section><h6>Wednesday</h6> <p>${(user.availability[3].start !== 'unavailable') ? 'Start: ' + user.availability[3].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
+            <section><h6>Thursday</h6> <p>${(user.availability[4].start !== 'unavailable') ? 'Start: ' + user.availability[4].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
+            <section><h6>Friday</h6> <p>${(user.availability[5].start !== 'unavailable') ? 'Start: ' + user.availability[5].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
+            <section><h6>Saturday</h6> <p>${(user.availability[6].start !== 'unavailable') ? 'Start: ' + user.availability[6].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
+            <button type="button" class="btn btn-outline-white btn-danger btn-lg">Remove User
+  -              <i class="fa fa-minus-circle ml-2"></i>
+            </select>
+          </div>
+          </div>
         </div>
-        <div class="collapse" id="${user.name.replace(/\s+/g, '')}Info">
-        <div class="card-body text-muted">
-          <section class="small"><h6>Sunday</h6> <p>Start: ${user.availability[0].start} to ${user.availability[0].end}</p></section><hr>
-          <section class="small"><h6>Monday</h6> <p>Start: ${user.availability[1].start} to ${user.availability[1].end}</p></section><hr>
-          <section class="small"><h6>Tuesday</h6> <p>Start: ${user.availability[2].start} to ${user.availability[2].end}</p></section><hr>
-          <section class="small"><h6>Wednesday</h6> <p>Start: ${user.availability[3].start} to ${user.availability[3].end}</p></section><hr>
-          <section class="small"><h6>Thursday</h6> <p>Start: ${user.availability[4].start} to ${user.availability[4].end}</p></section><hr>
-          <section class="small"><h6>Friday</h6> <p>Start: ${user.availability[5].start} to ${user.availability[5].end}</p></section><hr>
-          <section class="small"><h6>Saturday</h6> <p>Start: ${user.availability[6].start} to ${user.availability[6].end}</p></section><hr>
-          <button type="button" class="btn btn-outline-white btn-danger btn-lg" id="saveAvail">Save Availability
-              <i class="fa fa-save ml-2"></i>
-          </select>
-        </div>
-        </div>
-      </div>
-    </div>`)
+      </div>`);
   })
+  deleteUser();
 }
 
 
 function showStoreData(data) {
   const html = data.allUsers.map( user => {
   return(
-    `<div class="col-lg-3 col-md-12 mb-4">
+    `<div class="col-lg-3 col-md-12 mb-4 employee" data-id="${user._id}" id="${user._id}">
       <div class="card">
         <div class="card-header">
           <h4 class="btn btn-in w-100 text-muted" data-toggle="collapse" data-target="#${user.name.replace(/\s+/g, '')}Info" aria-expanded="false" aria-controls="${user.name.replace(/\s+/g, '')}Info">
@@ -121,15 +125,15 @@ function showStoreData(data) {
         </div>
         <div class="collapse" id="${user.name.replace(/\s+/g, '')}Info">
         <div class="card-body text-muted">
-          <section class="small"><h6>Sunday</h6> <p>Start: ${user.availability[0].start} to ${user.availability[0].end}</p></section><hr>
-          <section class="small"><h6>Monday</h6> <p>Start: ${user.availability[1].start} to ${user.availability[1].end}</p></section><hr>
-          <section class="small"><h6>Tuesday</h6> <p>Start: ${user.availability[2].start} to ${user.availability[2].end}</p></section><hr>
-          <section class="small"><h6>Wednesday</h6> <p>Start: ${user.availability[3].start} to ${user.availability[3].end}</p></section><hr>
-          <section class="small"><h6>Thursday</h6> <p>Start: ${user.availability[4].start} to ${user.availability[4].end}</p></section><hr>
-          <section class="small"><h6>Friday</h6> <p>Start: ${user.availability[5].start} to ${user.availability[5].end}</p></section><hr>
-          <section class="small"><h6>Saturday</h6> <p>Start: ${user.availability[6].start} to ${user.availability[6].end}</p></section><hr>
-          <button type="button" class="btn btn-outline-white btn-danger btn-lg" id="saveAvail">Save Availability
-              <i class="fa fa-save ml-2"></i>
+          <section><h6>Sunday</h6> <p>${(user.availability[0].start !== 'unavailable') ? 'Start: ' + user.availability[0].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
+          <section><h6>Monday</h6> <p>${(user.availability[1].start !== 'unavailable') ? 'Start: ' + user.availability[1].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
+          <section><h6>Tuesday</h6> <p>${(user.availability[2].start !== 'unavailable') ? 'Start: ' + user.availability[2].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
+          <section><h6>Wednesday</h6> <p>${(user.availability[3].start !== 'unavailable') ? 'Start: ' + user.availability[3].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
+          <section><h6>Thursday</h6> <p>${(user.availability[4].start !== 'unavailable') ? 'Start: ' + user.availability[4].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
+          <section><h6>Friday</h6> <p>${(user.availability[5].start !== 'unavailable') ? 'Start: ' + user.availability[5].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
+          <section><h6>Saturday</h6> <p>${(user.availability[6].start !== 'unavailable') ? 'Start: ' + user.availability[6].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
+          <button type="button" class="btn btn-outline-white btn-danger btn-lg remove-user">Remove User
+-              <i class="fa fa-minus-circle ml-2"></i>
           </select>
         </div>
         </div>
@@ -138,4 +142,25 @@ function showStoreData(data) {
   })
   $('#avail').html(html)
   $('#welcome').html(`<strong>Welcome ${data.user.name}!</strong>`);
+}
+
+function deleteUser() {
+  $('.remove-user').click(e => {
+    const authToken = localStorage.getItem('authToken');
+    const id = $(e.target).parents('.employee').data()
+    $.ajax(`/user/delete/${id}`, {
+      method: 'delete',
+      beforeSend: function(req) {
+        req.setRequestHeader('Authorization', 'Bearer ' + authToken)
+      },
+      success: (data) => {
+        console.log('this is the delete success');
+        removeUser(id);
+      }
+   });
+  })
+}
+
+function removeUser(id) {
+  $(`#${id}`).remove();
 }

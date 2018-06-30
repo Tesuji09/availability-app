@@ -54,8 +54,7 @@ router.post('/admin', function(req, res, next) {
     })
 })
 
-router.delete('/:id', function(req, res, next) {
-  const userTD = User.find({name: req.body.name});
+router.delete('/delete/:id', jwtAuth, function(req, res, next) {
   User.remove({_id: req.params.id})
     .exec()
     .then(result => {
