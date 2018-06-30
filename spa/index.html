@@ -109,7 +109,7 @@
             <h1 class="mb-4" id="welcome">
                 <strong>Welcome <i>insert username here</i>!</strong>
             </h1>
-            <p>
+            <p id="question">
                 <strong>What is your availability?</strong>
             </p>
       <!--Week Section-->
@@ -895,7 +895,7 @@
               </div>
           </div>
       </div>
-      <div class="modal fade" id="modalAddUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="modalAddUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
@@ -932,7 +932,7 @@
 
             </div>
             <div class="modal-footer d-flex justify-content-center">
-                <button class="btn btn-unique">Create <i class="fa fa-user-plus ml-1"></i></button>
+                <button type="submit" class="btn btn-unique" id="addEmp" data-dismiss="modal">Create <i class="fa fa-user-plus ml-1"></i></button>
             </div>
         </div>
     </div>

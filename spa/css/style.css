@@ -12,3 +12,7 @@
   body {
     height: 100vh;
   }
+
+  h6 {
+    font-size: .8rem;
+  }
