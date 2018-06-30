@@ -85,7 +85,7 @@ function clearEmpForm() {
 function displayUser(user) {
   $('#avail').append(e => {
     return(
-      `<div class="col-lg-3 col-md-12 mb-4" data-id="${user._id}" id="${user._id}">
+      `<div class="col-lg-3 col-md-12 mb-4" data-id="${user.id}" id="${user.id}">
         <div class="card">
           <div class="card-header">
             <h4 class="btn btn-in w-100 text-muted" data-toggle="collapse" data-target="#${user.name.replace(/\s+/g, '')}Info" aria-expanded="false" aria-controls="${user.name.replace(/\s+/g, '')}Info">

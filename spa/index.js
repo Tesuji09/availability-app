@@ -165,8 +165,9 @@ function sendRequest(date, allDay, startTime, endTime) {
 }
 
 function displayRequestData(rData) {
-  if(rData.length > 0) {
-    const requests = rData.map((request) => {
+  console.log(rData)
+  if(rData.requests.length > 0) {
+    const requests = rData.requests.map((request) => {
     console.log(request);
       return(`<tr>
         <td>${request.name}</td>
@@ -254,7 +255,7 @@ function saveEmployeeAvailability() {
       id,
       availability: availabilityData()
     }
-      $.ajax('/user/edit/availability', {
+      $.ajax('/user/edit', {
       method: 'put',
       beforeSend: function(req) {
         req.setRequestHeader('Authorization', 'Bearer ' + authToken)

@@ -69,11 +69,9 @@ router.delete('/delete/:id', jwtAuth, function(req, res, next) {
     });
 });
 
-router.put('/edit', function(req, res, next) {
-  Promise.resolve()
-  .then(() => {
-    User.findOneAndUpdate({_id: req.body.id}, {$set: req.body})
-  })
+router.put('/edit', function(req, res) {
+  console.log(req.body.availability)
+  User.findOneAndUpdate({_id: req.body.id}, {$set: { availability: req.body.availability }})
   .then((user) => {
       res.status(200).json({
         message: 'user updated',
