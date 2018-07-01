@@ -101,8 +101,8 @@ function displayUser(user) {
             <section><h6>Thursday</h6> <p>${(user.availability[4].start !== 'unavailable') ? 'Start: ' + user.availability[4].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
             <section><h6>Friday</h6> <p>${(user.availability[5].start !== 'unavailable') ? 'Start: ' + user.availability[5].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
             <section><h6>Saturday</h6> <p>${(user.availability[6].start !== 'unavailable') ? 'Start: ' + user.availability[6].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
-            <button type="button" class="btn btn-outline-white btn-danger btn-lg">Remove User
-  -              <i class="fa fa-minus-circle ml-2"></i>
+            <button type="button" class="btn btn-danger btn-lg small remove-user">Remove User
+            <i class="fa fa-minus-circle ml-2"></i></button>
             </select>
           </div>
           </div>
@@ -115,6 +115,7 @@ function displayUser(user) {
 
 function showStoreData(data) {
   const html = data.allUsers.map( user => {
+  if(user.role.includes('manager')) { return null }
   return(
     `<div class="col-lg-3 col-md-12 mb-4 employee" data-id="${user._id}" id="${user._id}">
       <div class="card">
@@ -132,8 +133,8 @@ function showStoreData(data) {
           <section><h6>Thursday</h6> <p>${(user.availability[4].start !== 'unavailable') ? 'Start: ' + user.availability[4].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
           <section><h6>Friday</h6> <p>${(user.availability[5].start !== 'unavailable') ? 'Start: ' + user.availability[5].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
           <section><h6>Saturday</h6> <p>${(user.availability[6].start !== 'unavailable') ? 'Start: ' + user.availability[6].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
-          <button type="button" class="btn btn-outline-white btn-danger btn-lg remove-user">Remove User
--              <i class="fa fa-minus-circle ml-2"></i>
+          <button type="button" class="btn btn-danger btn-lg small remove-user">Remove User
+          <i class="fa fa-minus-circle ml-2"></i></button>
           </select>
         </div>
         </div>
@@ -147,15 +148,17 @@ function showStoreData(data) {
 function deleteUser() {
   $('.remove-user').click(e => {
     const authToken = localStorage.getItem('authToken');
-    const id = $(e.target).parents('.employee').data()
-    $.ajax(`/user/delete/${id}`, {
+    const id = $(e.target).parents('.employee').data();
+    const _id = id.id
+    console.log(_id)
+    $.ajax(`/user/delete/${id.id}`, {
       method: 'delete',
       beforeSend: function(req) {
         req.setRequestHeader('Authorization', 'Bearer ' + authToken)
       },
       success: (data) => {
         console.log('this is the delete success');
-        removeUser(id);
+        removeUser(_id);
       }
    });
   })

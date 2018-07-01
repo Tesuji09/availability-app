@@ -168,11 +168,10 @@ function displayRequestData(rData) {
   console.log(rData)
   if(rData.requests.length > 0) {
     const requests = rData.requests.map((request) => {
-    console.log(request);
       return(`<tr>
         <td>${request.name}</td>
         <td>${request.date}</td>
-        <td>${request.startTime}, ${request.endTime}</td>
+        <td>${(request.startTime === undefined) ? "All Day" : request.startTime + "to" + request.endTime}</td>
         <td>${(request.status === 'accepted') ? request.acceptedBy : '<button type="button" class="btn btn-success">Cover Shift!</button> '}</td>
       </tr>`)
   });
@@ -193,8 +192,21 @@ function acceptRequest() {
     contentType: 'application/json',
     data: JSON.stringify({ acceptedby: name, status: accepted }),
     success: (data) => {
+      addRequest(data)
     }
   });
+}
+
+function addRequest(rData) {
+  const requests = rData.requests.map((request) => {
+    return(`<tr>
+      <td>${request.name}</td>
+      <td>${request.date}</td>
+      <td>${(request.startTime === undefined) ? "All Day" : request.startTime + "to" + request.endTime}</td>
+      <td>${(request.status === 'accepted') ? request.acceptedBy : '<button type="button" class="btn btn-success">Cover Shift!</button> '}</td>
+    </tr>`)
+});
+$('#TORequests').html(requests);
 }
 
 function submitRequest() {

@@ -55,6 +55,7 @@ router.post('/admin', function(req, res, next) {
 })
 
 router.delete('/delete/:id', jwtAuth, function(req, res, next) {
+  console.log(req.params.id)
   User.remove({_id: req.params.id})
     .exec()
     .then(result => {
