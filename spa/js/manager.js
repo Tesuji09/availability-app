@@ -64,9 +64,9 @@ function addUser() {
       success: (data) => {
         console.log(data);
         displayUser(data);
+        addQuery();
       }
    });
-    displayUser();
   });
 }
 
@@ -83,9 +83,10 @@ function clearEmpForm() {
 }
 
 function displayUser(user) {
+  console.log(user._id)
   $('#avail').append(e => {
     return(
-      `<div class="col-lg-3 col-md-12 mb-4" data-id="${user.id}" id="${user.id}">
+      `<div class="col-lg-3 col-md-12 mb-4 employee" data-id="${user._id}" id="${user._id}">
         <div class="card">
           <div class="card-header">
             <h4 class="btn btn-in w-100 text-muted" data-toggle="collapse" data-target="#${user.name.replace(/\s+/g, '')}Info" aria-expanded="false" aria-controls="${user.name.replace(/\s+/g, '')}Info">
@@ -109,7 +110,6 @@ function displayUser(user) {
         </div>
       </div>`);
   })
-  addQuery();
 }
 
 
@@ -147,10 +147,10 @@ function showStoreData(data) {
 
 function addQuery() {
   $('.queryDelete').click(e => {
-    const id = $(e.target).parents('.employee').data();
-    const _id = id.id;
-    addId(_id);
-    console.log('this is the id: ' + _id)
+    const id = $(e.target).parents('.employee').data('id');
+    console.log(id)
+    addId(id);
+    console.log('this is the id: ' + id)
   })
 }
 
