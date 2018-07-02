@@ -71,17 +71,21 @@ router.delete('/delete/:id', jwtAuth, function(req, res, next) {
 });
 
 router.put('/edit', function(req, res) {
-  console.log(req.body.availability)
-  User.findOneAndUpdate({_id: req.body.id}, {$set: { availability: req.body.availability }})
-  .then((user) => {
-      res.status(200).json({
-        message: 'user updated',
-        user: user
-      })
-  })
-  .catch((err) => {
-    res.status(500).json({ message: err.toString() });
-  });
+  console.log({ body: req.body })
+  User.findById(req.body.id)
+    .then(user => {
+      console.log(user)
+      return User.findOneAndUpdate({_id: req.body.id}, {$set: { availability: req.body.availability }})
+    })
+    .then((user) => {
+        res.status(200).json({
+          message: 'user updated',
+          user: user.apiRep()
+        })
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err.toString() });
+    });
 });
 
 router.get('/store', jwtAuth, (req, res) => {
