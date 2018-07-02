@@ -95,12 +95,12 @@ function displayUser(user) {
           <div class="collapse" id="${user.name.replace(/\s+/g, '')}Info">
           <div class="card-body text-muted">
             <section><h6>Sunday</h6> <p>${(user.availability[0].start !== 'unavailable') ? 'Start: ' + user.availability[0].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
-            <section><h6>Monday</h6> <p>${(user.availability[1].start !== 'unavailable') ? 'Start: ' + user.availability[1].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
-            <section><h6>Tuesday</h6> <p>${(user.availability[2].start !== 'unavailable') ? 'Start: ' + user.availability[2].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
-            <section><h6>Wednesday</h6> <p>${(user.availability[3].start !== 'unavailable') ? 'Start: ' + user.availability[3].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
-            <section><h6>Thursday</h6> <p>${(user.availability[4].start !== 'unavailable') ? 'Start: ' + user.availability[4].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
-            <section><h6>Friday</h6> <p>${(user.availability[5].start !== 'unavailable') ? 'Start: ' + user.availability[5].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
-            <section><h6>Saturday</h6> <p>${(user.availability[6].start !== 'unavailable') ? 'Start: ' + user.availability[6].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
+            <section><h6>Monday</h6> <p>${(user.availability[1].start !== 'unavailable') ? 'Start: ' + user.availability[1].start + ' to ' + user.availability[1].end : 'Unavailable'}</p></section><hr>
+            <section><h6>Tuesday</h6> <p>${(user.availability[2].start !== 'unavailable') ? 'Start: ' + user.availability[2].start + ' to ' + user.availability[2].end : 'Unavailable'}</p></section><hr>
+            <section><h6>Wednesday</h6> <p>${(user.availability[3].start !== 'unavailable') ? 'Start: ' + user.availability[3].start + ' to ' + user.availability[3].end : 'Unavailable'}</p></section><hr>
+            <section><h6>Thursday</h6> <p>${(user.availability[4].start !== 'unavailable') ? 'Start: ' + user.availability[4].start + ' to ' + user.availability[4].end : 'Unavailable'}</p></section><hr>
+            <section><h6>Friday</h6> <p>${(user.availability[5].start !== 'unavailable') ? 'Start: ' + user.availability[5].start + ' to ' + user.availability[5].end : 'Unavailable'}</p></section><hr>
+            <section><h6>Saturday</h6> <p>${(user.availability[6].start !== 'unavailable') ? 'Start: ' + user.availability[6].start + ' to ' + user.availability[6].end : 'Unavailable'}</p></section><hr>
             <button type="button" class="btn btn-danger btn-lg small queryDelete" data-toggle="modal" data-target="#deleteModal">Remove User
             <i class="fa fa-minus-circle ml-2"></i></button>
             </select>
@@ -127,12 +127,12 @@ function showStoreData(data) {
         <div class="collapse" id="${user.name.replace(/\s+/g, '')}Info">
         <div class="card-body text-muted">
           <section><h6>Sunday</h6> <p>${(user.availability[0].start !== 'unavailable') ? 'Start: ' + user.availability[0].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
-          <section><h6>Monday</h6> <p>${(user.availability[1].start !== 'unavailable') ? 'Start: ' + user.availability[1].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
-          <section><h6>Tuesday</h6> <p>${(user.availability[2].start !== 'unavailable') ? 'Start: ' + user.availability[2].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
-          <section><h6>Wednesday</h6> <p>${(user.availability[3].start !== 'unavailable') ? 'Start: ' + user.availability[3].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
-          <section><h6>Thursday</h6> <p>${(user.availability[4].start !== 'unavailable') ? 'Start: ' + user.availability[4].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
-          <section><h6>Friday</h6> <p>${(user.availability[5].start !== 'unavailable') ? 'Start: ' + user.availability[5].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
-          <section><h6>Saturday</h6> <p>${(user.availability[6].start !== 'unavailable') ? 'Start: ' + user.availability[6].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
+          <section><h6>Monday</h6> <p>${(user.availability[1].start !== 'unavailable') ? 'Start: ' + user.availability[1].start + ' to ' + user.availability[1].end : 'Unavailable'}</p></section><hr>
+          <section><h6>Tuesday</h6> <p>${(user.availability[2].start !== 'unavailable') ? 'Start: ' + user.availability[2].start + ' to ' + user.availability[2].end : 'Unavailable'}</p></section><hr>
+          <section><h6>Wednesday</h6> <p>${(user.availability[3].start !== 'unavailable') ? 'Start: ' + user.availability[3].start + ' to ' + user.availability[3].end : 'Unavailable'}</p></section><hr>
+          <section><h6>Thursday</h6> <p>${(user.availability[4].start !== 'unavailable') ? 'Start: ' + user.availability[4].start + ' to ' + user.availability[4].end : 'Unavailable'}</p></section><hr>
+          <section><h6>Friday</h6> <p>${(user.availability[5].start !== 'unavailable') ? 'Start: ' + user.availability[5].start + ' to ' + user.availability[5].end : 'Unavailable'}</p></section><hr>
+          <section><h6>Saturday</h6> <p>${(user.availability[6].start !== 'unavailable') ? 'Start: ' + user.availability[6].start + ' to ' + user.availability[6].end : 'Unavailable'}</p></section><hr>
           <button type="button" class="btn btn-danger btn-lg small queryDelete" data-toggle="modal" data-target="#deleteModal">Remove User
           <i class="fa fa-minus-circle ml-2"></i></button>
           </select>
