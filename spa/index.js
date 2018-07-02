@@ -288,6 +288,7 @@ function login() {
   toggleAllDay();
   saveEmployeeAvailability();
   closeRequestForm();
+  deleteUser();
 }
 
 $(login)

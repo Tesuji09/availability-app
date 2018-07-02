@@ -43,7 +43,7 @@ function showStorePage(data) {
   );
   $('#saveAvail').remove()
   addUser();
-  deleteUser();
+  addQuery();
 }
 
 function addUser() {
@@ -101,7 +101,7 @@ function displayUser(user) {
             <section><h6>Thursday</h6> <p>${(user.availability[4].start !== 'unavailable') ? 'Start: ' + user.availability[4].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
             <section><h6>Friday</h6> <p>${(user.availability[5].start !== 'unavailable') ? 'Start: ' + user.availability[5].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
             <section><h6>Saturday</h6> <p>${(user.availability[6].start !== 'unavailable') ? 'Start: ' + user.availability[6].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
-            <button type="button" class="btn btn-danger btn-lg small remove-user">Remove User
+            <button type="button" class="btn btn-danger btn-lg small queryDelete" data-toggle="modal" data-target="#deleteModal">Remove User
             <i class="fa fa-minus-circle ml-2"></i></button>
             </select>
           </div>
@@ -109,7 +109,7 @@ function displayUser(user) {
         </div>
       </div>`);
   })
-  deleteUser();
+  addQuery();
 }
 
 
@@ -133,7 +133,7 @@ function showStoreData(data) {
           <section><h6>Thursday</h6> <p>${(user.availability[4].start !== 'unavailable') ? 'Start: ' + user.availability[4].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
           <section><h6>Friday</h6> <p>${(user.availability[5].start !== 'unavailable') ? 'Start: ' + user.availability[5].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
           <section><h6>Saturday</h6> <p>${(user.availability[6].start !== 'unavailable') ? 'Start: ' + user.availability[6].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
-          <button type="button" class="btn btn-danger btn-lg small remove-user">Remove User
+          <button type="button" class="btn btn-danger btn-lg small queryDelete" data-toggle="modal" data-target="#deleteModal">Remove User
           <i class="fa fa-minus-circle ml-2"></i></button>
           </select>
         </div>
@@ -145,13 +145,25 @@ function showStoreData(data) {
   $('#welcome').html(`<strong>Welcome ${data.user.name}!</strong>`);
 }
 
+function addQuery() {
+  $('.queryDelete').click(e => {
+    const id = $(e.target).parents('.employee').data();
+    const _id = id.id;
+    addId(_id);
+    console.log('this is the id: ' + _id)
+  })
+}
+
+function addId(id) {
+  $('.remove-user').data('id', id)
+}
+
 function deleteUser() {
   $('.remove-user').click(e => {
+    const _id = $('.remove-user').data('id')
     const authToken = localStorage.getItem('authToken');
-    const id = $(e.target).parents('.employee').data();
-    const _id = id.id
     console.log(_id)
-    $.ajax(`/user/delete/${id.id}`, {
+    $.ajax(`/user/delete/${_id}`, {
       method: 'delete',
       beforeSend: function(req) {
         req.setRequestHeader('Authorization', 'Bearer ' + authToken)
