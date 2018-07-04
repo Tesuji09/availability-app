@@ -79,6 +79,7 @@ function storeJWT(data) {
   localStorage.setItem('email', data.user.email);
   localStorage.setItem('name', data.user.name)
   localStorage.setItem('id', data.user._id)
+  localStorage.setItem('data', JSON.stringify(data))
 }
 
 
@@ -281,6 +282,28 @@ function saveEmployeeAvailability() {
   })
 }
 
+function checkState() {
+  const data = JSON.parse(localStorage.getItem('data'))
+  if(data !== null) {
+    if(data.user.role.includes('manager')){
+      showStorePage(data);
+      getRequestData();
+    } else {
+      showEmployeePage(data);
+      getRequestData();
+    }
+  }
+  login();
+  logout();
+}
+
+function logout() {
+  $('#logout').click(() => {
+    localStorage.clear();
+    window.location.reload();
+});
+}
+
 function login() {
   submitLogin();
   setDate();
@@ -291,4 +314,4 @@ function login() {
   deleteUser();
 }
 
-$(login)
+$(checkState)
