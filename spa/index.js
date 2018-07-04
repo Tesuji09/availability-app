@@ -57,6 +57,10 @@ function auth() {
         showEmployeePage(data);
         getRequestData();
       }
+    },
+    error: (error) => {
+      console.log('this error is running')
+      $('#loginWarning').html('Invalid email or password');
     }
   });
 }
@@ -313,13 +317,25 @@ function saveEmployeeAvailability() {
 function checkState() {
   const data = JSON.parse(localStorage.getItem('data'))
   if(data !== null) {
-    if(data.user.role.includes('manager')){
-      showStorePage(data);
-      getRequestData();
-    } else {
-      showEmployeePage(data);
-      getRequestData();
-    }
+    console.log(`/user/employee/${localStorage.getItem('id')}`)
+    $.ajax(`/user/employee/${localStorage.getItem('id')}`, {
+      method: 'get',
+      beforeSend: function(req) {
+        req.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('authToken'))
+      },
+      success: (data) => {
+        if(data.user.role.includes('manager')){
+          showStorePage(data);
+          getRequestData();
+        } else {
+          showEmployeePage(data);
+          getRequestData();
+        }
+      },
+      error: (error) => {
+        logout()
+      }
+    });
   }
   login();
   logout();

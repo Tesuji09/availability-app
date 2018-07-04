@@ -100,17 +100,15 @@ router.get('/store', jwtAuth, (req, res) => {
   });
 });
 
-// router.get('/employee', (req, res) => {
-//   User.findOne({_id: req.headers.email.})
-//   .then((users) => {
-//     const rep = users.map(user => user.apiRep())
-//     console.log(rep)
-//     res.json({users:rep})
-//   })
-//   .catch(error => {
-//     res.status(500).json({ error })
-//   });
-// });
+router.get('/employee/:id', (req, res) => {
+  User.findOne({_id: req.params.id})
+  .then((user) => {
+    res.json({user})
+  })
+  .catch(error => {
+    res.status(500).json({ error })
+  });
+});
 
 
 module.exports = router;
