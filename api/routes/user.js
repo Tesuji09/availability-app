@@ -93,17 +93,17 @@ router.get('/store', jwtAuth, (req, res) => {
   .then((users) => {
     const rep = users.map(user => user.apiRep())
     console.log(rep)
-    res.json({users:rep})
+    res.json({allUsers:rep})
   })
   .catch(error => {
     res.status(500).json({ error })
   });
 });
 
-router.get('/employee/:id', (req, res) => {
+router.get('/employee/:id', jwtAuth, (req, res) => {
   User.findOne({_id: req.params.id})
   .then((user) => {
-    res.json({user})
+      res.json({message: 'token is valid'})
   })
   .catch(error => {
     res.status(500).json({ error })

@@ -323,8 +323,9 @@ function checkState() {
       beforeSend: function(req) {
         req.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('authToken'))
       },
-      success: (data) => {
+      success: (confirmation) => {
         if(data.user.role.includes('manager')){
+          console.log(data)
           showStorePage(data);
           getRequestData();
         } else {

@@ -75,6 +75,7 @@ function closeRequestForm() {
 }
 
 function clearEmpForm() {
+  console.log('close request form is working')
   $('#email').val('')
   $('#firstName').val('')
   $('#lastName').val('')
