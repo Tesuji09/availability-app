@@ -112,6 +112,5 @@ router.get('/store', jwtAuth, (req, res) => {
 //   });
 // });
 
-router.put('/edit/password/:id')
 
 module.exports = router;

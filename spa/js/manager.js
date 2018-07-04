@@ -43,7 +43,7 @@ function showStorePage(data) {
   );
   $('#saveAvail').remove()
   addUser();
-  addQuery();
+  addUserQuery();
 }
 
 function addUser() {
@@ -64,7 +64,7 @@ function addUser() {
       success: (data) => {
         console.log(data);
         displayUser(data);
-        addQuery();
+        addUserQuery();
       }
    });
   });
@@ -83,39 +83,10 @@ function clearEmpForm() {
 }
 
 function displayUser(user) {
-  console.log(user._id)
-  $('#avail').append(e => {
-    return(
-      `<div class="col-lg-3 col-md-12 mb-4 employee" data-id="${user._id}" id="${user._id}">
-        <div class="card">
-          <div class="card-header">
-            <h4 class="btn btn-in w-100 text-muted" data-toggle="collapse" data-target="#${user.name.replace(/\s+/g, '')}Info" aria-expanded="false" aria-controls="${user.name.replace(/\s+/g, '')}Info">
-              <strong>${user.name}</strong>
-            </h4>
-          </div>
-          <div class="collapse" id="${user.name.replace(/\s+/g, '')}Info">
-          <div class="card-body text-muted">
-            <section><h6>Sunday</h6> <p>${(user.availability[0].start !== 'unavailable') ? 'Start: ' + user.availability[0].start + ' to ' + user.availability[0].end : 'Unavailable'}</p></section><hr>
-            <section><h6>Monday</h6> <p>${(user.availability[1].start !== 'unavailable') ? 'Start: ' + user.availability[1].start + ' to ' + user.availability[1].end : 'Unavailable'}</p></section><hr>
-            <section><h6>Tuesday</h6> <p>${(user.availability[2].start !== 'unavailable') ? 'Start: ' + user.availability[2].start + ' to ' + user.availability[2].end : 'Unavailable'}</p></section><hr>
-            <section><h6>Wednesday</h6> <p>${(user.availability[3].start !== 'unavailable') ? 'Start: ' + user.availability[3].start + ' to ' + user.availability[3].end : 'Unavailable'}</p></section><hr>
-            <section><h6>Thursday</h6> <p>${(user.availability[4].start !== 'unavailable') ? 'Start: ' + user.availability[4].start + ' to ' + user.availability[4].end : 'Unavailable'}</p></section><hr>
-            <section><h6>Friday</h6> <p>${(user.availability[5].start !== 'unavailable') ? 'Start: ' + user.availability[5].start + ' to ' + user.availability[5].end : 'Unavailable'}</p></section><hr>
-            <section><h6>Saturday</h6> <p>${(user.availability[6].start !== 'unavailable') ? 'Start: ' + user.availability[6].start + ' to ' + user.availability[6].end : 'Unavailable'}</p></section><hr>
-            <button type="button" class="btn btn-danger btn-lg small queryDelete" data-toggle="modal" data-target="#deleteModal">Remove User
-            <i class="fa fa-minus-circle ml-2"></i></button>
-            </select>
-          </div>
-          </div>
-        </div>
-      </div>`);
-  })
+  console.log('diplayUser is running')
+  $('#avail').append(e => storeInformation(user));
 }
-
-
-function showStoreData(data) {
-  const html = data.allUsers.map( user => {
-  if(user.role.includes('manager')) { return null }
+function storeInformation(user) {
   return(
     `<div class="col-lg-3 col-md-12 mb-4 employee" data-id="${user._id}" id="${user._id}">
       <div class="card">
@@ -140,15 +111,33 @@ function showStoreData(data) {
         </div>
       </div>
     </div>`);
+}
+
+function showStoreData(data) {
+  const html = data.allUsers.map( user => {
+    if(user.role.includes('manager')) { return null }
+    return(storeInformation(user));
   })
+  console.log(html)
   $('#avail').html(html)
   $('#welcome').html(`<strong>Welcome ${data.user.name}!</strong>`);
 }
 
-function addQuery() {
+function addUserQuery() {
   $('.queryDelete').click(e => {
+    deleteUser();
     const id = $(e.target).parents('.employee').data('id');
     console.log(id)
+    addId(id);
+    console.log('this is the id: ' + id)
+  })
+}
+
+function addRequestQuery() {
+  $('.deleteRequest').click(e => {
+    deleteRequest();
+    console.log($(e.target).parents('.employee').attr('id'))
+    const id = $(e.target).parents('.employee').attr('id');
     addId(id);
     console.log('this is the id: ' + id)
   })
@@ -159,6 +148,7 @@ function addId(id) {
 }
 
 function deleteUser() {
+  $('.remove-user').off();
   $('.remove-user').click(e => {
     const _id = $('.remove-user').data('id')
     const authToken = localStorage.getItem('authToken');
@@ -170,12 +160,32 @@ function deleteUser() {
       },
       success: (data) => {
         console.log('this is the delete success');
-        removeUser(_id);
+        removeHTML(_id);
       }
    });
   })
 }
 
-function removeUser(id) {
+function deleteRequest() {
+  $('.remove-user').off();
+  $('.remove-user').click(e => {
+    const _id = $('.remove-user').data('id')
+    const authToken = localStorage.getItem('authToken');
+    console.log(_id)
+    $.ajax(`/request/delete/${_id}`, {
+      method: 'delete',
+      beforeSend: function(req) {
+        req.setRequestHeader('Authorization', 'Bearer ' + authToken)
+      },
+      success: (data) => {
+        console.log('this is the delete success');
+        removeHTML(_id);
+      }
+   });
+  })
+}
+
+
+function removeHTML(id) {
   $(`#${id}`).remove();
 }

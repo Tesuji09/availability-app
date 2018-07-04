@@ -49,4 +49,20 @@ router.put('/', (req, res) => {
   })
 })
 
+router.delete('/delete/:id', jwtAuth, function(req, res, next) {
+  console.log(req.params.id)
+  Request.remove({_id: req.params.id})
+    .exec()
+    .then(result => {
+      res.status(200).json({
+        message: "Request Deleted"
+      })
+    })
+    .catch(err =>{
+      return res.status(500).json({
+        error: err
+      });
+    });
+});
+
 module.exports = router;

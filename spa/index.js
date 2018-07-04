@@ -77,8 +77,9 @@ function getRequestData() {
 function storeJWT(data) {
   localStorage.setItem('authToken', data.authToken);
   localStorage.setItem('email', data.user.email);
-  localStorage.setItem('name', data.user.name)
-  localStorage.setItem('id', data.user._id)
+  localStorage.setItem('name', data.user.name);
+  localStorage.setItem('id', data.user._id);
+  localStorage.setItem('role', data.user.role);
   localStorage.setItem('data', JSON.stringify(data))
 }
 
@@ -146,7 +147,6 @@ function currentDate() {
 function setDate() {
   $('#date').val(currentDate());
   $('#date').attr('min', currentDate())
-  console.log(currentDate());
 }
 
 function sendRequest(date, allDay, startTime, endTime) {
@@ -166,19 +166,31 @@ function sendRequest(date, allDay, startTime, endTime) {
 }
 
 function displayRequestData(rData) {
-  console.log(rData)
   if(rData.requests.length > 0) {
     const requests = rData.requests.map((request) => {
-      return(`<tr>
-        <td>${request.name}</td>
-        <td>${request.date}</td>
-        <td>${(request.startTime === undefined) ? "All Day" : request.startTime + "to" + request.endTime}</td>
-        <td>${(request.status === 'accepted') ? request.acceptedBy : '<button type="button" class="btn btn-success">Cover Shift!</button> '}</td>
-      </tr>`)
+      console.log(requestHTML(request));
+      return(requestHTML(request));
   });
-  console.log(requests)
   $('#TORequests').html(requests);
+  addRequestQuery();
   }
+}
+
+function requestHTML(request) {
+  return (`<tr class="employee" id ="${request._id}">
+    <td>${request.name}</td>
+    <td>${request.date}</td>
+    <td>${(request.startTime === undefined) ? "All Day" : request.startTime + " to " + request.endTime}</td>
+    <td>${requestButton(request)}</td>
+  </tr>`)
+}
+
+function requestButton(request) {
+  if(!localStorage.getItem('role').includes('manager')) {
+  return (request.status === 'accepted') ? request.acceptedBy : '<button type="button" class="btn btn-success acceptRequest">Cover Shift!</button> '
+  } else {
+    return (request.status === 'accepted') ? request.acceptedBy : '<button type="button" class="btn btn-danger deleteRequest" data-toggle="modal" data-target="#deleteModal">Delete!</button> '
+}
 }
 
 function acceptRequest() {
@@ -200,12 +212,7 @@ function acceptRequest() {
 
 function addRequest(rData) {
   const requests = rData.requests.map((request) => {
-    return(`<tr>
-      <td>${request.name}</td>
-      <td>${request.date}</td>
-      <td>${(request.startTime === undefined) ? "All Day" : request.startTime + "to" + request.endTime}</td>
-      <td>${(request.status === 'accepted') ? request.acceptedBy : '<button type="button" class="btn btn-success">Cover Shift!</button> '}</td>
-    </tr>`)
+    return(requestHTML(request))
 });
 $('#TORequests').html(requests);
 }
@@ -311,7 +318,6 @@ function login() {
   toggleAllDay();
   saveEmployeeAvailability();
   closeRequestForm();
-  deleteUser();
 }
 
 $(checkState)
