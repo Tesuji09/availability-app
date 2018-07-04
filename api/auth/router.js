@@ -37,8 +37,8 @@ router.post('/', localAuth, (req, res) => {
       } else {
         User.find()
         .then(allUsers=> {
-          console.log(allUsers);
-          res.json({authToken, user: currentUser.apiRep(), allUsers});
+          const rep = allUsers.map(user => user.apiRep());
+          res.json({authToken, user: currentUser.apiRep(), allUsers: rep});
         })
         .catch(error => {
           console.error(error);

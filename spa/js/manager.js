@@ -105,9 +105,8 @@ function storeInformation(user) {
           <section><h6>Thursday</h6> <p>${(user.availability[4].start !== 'unavailable') ? 'Start: ' + user.availability[4].start + ' to ' + user.availability[4].end : 'Unavailable'}</p></section><hr>
           <section><h6>Friday</h6> <p>${(user.availability[5].start !== 'unavailable') ? 'Start: ' + user.availability[5].start + ' to ' + user.availability[5].end : 'Unavailable'}</p></section><hr>
           <section><h6>Saturday</h6> <p>${(user.availability[6].start !== 'unavailable') ? 'Start: ' + user.availability[6].start + ' to ' + user.availability[6].end : 'Unavailable'}</p></section><hr>
-          <button type="button" class="btn btn-danger btn-lg small queryDelete" data-toggle="modal" data-target="#deleteModal">Remove User
-          <i class="fa fa-minus-circle ml-2"></i></button>
-          </select>
+          <button type="button" class="btn btn-danger btn-sm small queryDelete" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-minus-circle ml-2"></i> Remove User</button>
+          <button type="button" class="btn btn-outline-default btn-sm btn-rounded waves-effect changePW" data-email="${user.email}" id="${user._id}">Change Password</button>
         </div>
         </div>
       </div>
@@ -189,4 +188,8 @@ function deleteRequest() {
 
 function removeHTML(id) {
   $(`#${id}`).remove();
+}
+
+function changePassword(user) {
+
 }
