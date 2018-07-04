@@ -181,7 +181,7 @@ function requestHTML(request) {
     <td>${request.name}</td>
     <td>${request.date}</td>
     <td>${(request.startTime === undefined) ? "All Day" : request.startTime + " to " + request.endTime}</td>
-    <td>${requestButton(request)}</td>
+    <td id="button">${requestButton(request)}</td>
   </tr>`)
 }
 
@@ -193,21 +193,27 @@ function requestButton(request) {
 }
 }
 
-function acceptRequest() {
-  const authToken = localStorage.getItem('authToken');
-  const id = localStorage.getItem('id')
-  const name = localStorage.getItem('name')
-  $.ajax('/request', {
-    method: 'put',
-    beforeSend: function(req) {
-      req.setRequestHeader('Authorization', 'Bearer ' + authToken)
-    },
-    contentType: 'application/json',
-    data: JSON.stringify({ acceptedby: name, status: accepted }),
-    success: (data) => {
-      addRequest(data)
-    }
-  });
+function acceptRequest(id) {
+  $('.acceptRequest').click( e => {
+    const authToken = localStorage.getItem('authToken');
+    const id = $(e.target).parents('.employee').attr('id')
+    const name = localStorage.getItem('name')
+    $.ajax('/request', {
+      method: 'put',
+      beforeSend: function(req) {
+        req.setRequestHeader('Authorization', 'Bearer ' + authToken)
+      },
+      contentType: 'application/json',
+      data: JSON.stringify({ acceptedBy: name, status: accepted }),
+      success: (data) => {
+        changeRequestState(data.acceptedBy, id);
+      }
+    });
+  })
+}
+
+function changeRequestState(name, id) {
+  $('#id').children('button').html(`${name}`)
 }
 
 function addRequest(rData) {
