@@ -161,6 +161,10 @@ function sendRequest(date, allDay, startTime, endTime) {
     contentType: 'application/json',
     data: JSON.stringify(request),
     success: (data) => {
+      $('#TORequests').append(requestHTML(data))
+    },
+    error: (error) => {
+
     }
   });
 }
@@ -168,11 +172,11 @@ function sendRequest(date, allDay, startTime, endTime) {
 function displayRequestData(rData) {
   if(rData.requests.length > 0) {
     const requests = rData.requests.map((request) => {
-      console.log(requestHTML(request));
       return(requestHTML(request));
   });
   $('#TORequests').html(requests);
   addRequestQuery();
+  addConfirmation();
   }
 }
 
@@ -180,40 +184,51 @@ function requestHTML(request) {
   return (`<tr class="employee" id ="${request._id}">
     <td>${request.name}</td>
     <td>${request.date}</td>
-    <td>${(request.startTime === undefined) ? "All Day" : request.startTime + " to " + request.endTime}</td>
+    <td>${(request.startTime === undefined || request.startTime === 'N/A') ? "All Day" : request.startTime + " to " + request.endTime}</td>
     <td id="button">${requestButton(request)}</td>
   </tr>`)
 }
 
 function requestButton(request) {
   if(!localStorage.getItem('role').includes('manager')) {
-  return (request.status === 'accepted') ? request.acceptedBy : '<button type="button" class="btn btn-success acceptRequest">Cover Shift!</button> '
+  return (request.status === 'accepted') ? request.acceptedBy : '<button type="button" class="btn btn-success acceptRequest" data-toggle="modal" data-target="#acceptModal">Cover Shift!</button> '
   } else {
     return (request.status === 'accepted') ? request.acceptedBy : '<button type="button" class="btn btn-danger deleteRequest" data-toggle="modal" data-target="#deleteModal">Delete!</button> '
 }
 }
 
 function acceptRequest(id) {
-  $('.acceptRequest').click( e => {
+  $('.accept-request').click( e => {
+    console.log(id)
     const authToken = localStorage.getItem('authToken');
-    const id = $(e.target).parents('.employee').attr('id')
-    const name = localStorage.getItem('name')
+    const name = localStorage.getItem('name');
     $.ajax('/request', {
       method: 'put',
       beforeSend: function(req) {
         req.setRequestHeader('Authorization', 'Bearer ' + authToken)
       },
       contentType: 'application/json',
-      data: JSON.stringify({ acceptedBy: name, status: accepted }),
+      data: JSON.stringify({ id, acceptedBy: name, status: 'accepted' }),
       success: (data) => {
-        changeRequestState(data.acceptedBy, id);
+        console.log(data)
+        changeRequestState(name, id);
       }
     });
   })
 }
 
+function addConfirmation() {
+  $('.acceptRequest').click(e => {
+    const id = $(e.target).parents('.employee').attr('id');
+    console.log(id)
+    $('.accept-request').off();
+    acceptRequest(id);
+  })
+}
+
 function changeRequestState(name, id) {
-  $('#id').children('button').html(`${name}`)
+  console.log(id)
+  $(`#${id}`).children('#button').html(`${name}`)
 }
 
 function addRequest(rData) {

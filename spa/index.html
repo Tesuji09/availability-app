@@ -807,7 +807,7 @@
                   <form>
                     <div class="modal-body">
                         <label for="date">Date</label>
-                        <input type="date" class="datepicker" id="date"><br>
+                        <input type="date" class="datepicker" id="date" required><br>
                         <label for="allDay"> All Day</label>
                         <input type="checkbox" id="allDay"><br>
                         <label for="startTime" class="mt-2"> Start Time</label>
@@ -901,39 +901,36 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body mx-3">
-            <div class="md-form mb-5">
-              <i class="fa fa-user prefix grey-text"></i>
-              <input type="text" id="firstName" class="form-control validate">
-              <label data-error="wrong" data-success="right" for="firstName">First Name</label>
-            </div>
-            <div class="md-form mb-5">
-              <i class="fa fa-user prefix grey-text"></i>
-              <input type="text" id="lastName" class="form-control validate">
-              <label data-error="wrong" data-success="right" for="lastName">Last Name</label>
-            </div>
-            <div class="md-form mb-5">
-              <i class="fa fa-envelope prefix grey-text"></i>
-              <input type="email" id="email" class="form-control validate">
-              <label data-error="Invalid" data-success="" for="email">Your email</label>
-            </div>
-
-            <div class="md-form mb-5">
-              <input type="password" id="password" class="form-control validate">
-              <label data-error="wrong" data-success="right" for="password">Password</label>
-            </div>
-            <div class="md-form mb-5">
-              <input type="password" id="reEnterPassword" class="form-control validate">
-              <label data-error="wrong" data-success="right" for="reEnterPassword">Reenter Password</label>
-            </div>
-        </div>
-        <div class="modal-footer d-flex justify-content-center">
-            <button type="submit" class="btn btn-unique" id="addEmp" data-dismiss="modal">Create <i class="fa fa-user-plus ml-1"></i></button>
-        </div>
+          <form>
+            <div class="modal-body mx-3">
+              <div class="md-form mb-5">
+                <i class="fa fa-user prefix grey-text"></i>
+                <input type="text" id="firstName" class="form-control validate">
+                <label for="firstName">First Name</label>
+              </div>
+              <div class="md-form mb-5">
+                <i class="fa fa-user prefix grey-text"></i>
+                <input type="text" id="lastName" class="form-control validate">
+                <label for="lastName">Last Name</label>
+              </div>
+              <div class="md-form mb-5">
+                <i class="fa fa-envelope prefix grey-text"></i>
+                <input type="email" id="email" class="form-control validate">
+                <label for="email">Your email</label>
+              </div>
+              <div class="md-form mb-5">
+                <input type="password" id="password" class="form-control validate">
+                <label data-error="wrong" data-success="right" for="password">Password</label>
+              </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+              <button type="submit" class="btn btn-unique" id="addEmp" data-dismiss="modal">Create <i class="fa fa-user-plus ml-1"></i></button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
     <div class="modal-dialog modal-notify modal-danger" role="document">
     <!--Content-->
       <div class="modal-content">
@@ -958,6 +955,36 @@
         <div class="modal-footer justify-content-center">
           <a type="button" class="btn btn-danger remove-user" data-dismiss="modal">Delete <i class="fa fa-diamond ml-1"></i></a>
           <a type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">Cancel</a>
+        </div>
+      </div>
+    <!--/.Content-->
+    </div>
+  </div>
+  <div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="accept" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-success" role="document">
+    <!--Content-->
+      <div class="modal-content">
+        <!--Header-->
+        <div class="modal-header">
+            <p class="heading lead">Accept Shift</p>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="white-text">&times;</span>
+            </button>
+        </div>
+
+        <!--Body-->
+        <div class="modal-body">
+          <div class="text-center">
+            <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+            <p>Are you sure you want to accept this shift?</p>
+          </div>
+        </div>
+
+        <!--Footer-->
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-success accept-request" data-dismiss="modal">Accept</button>
+          <button type="button" class="btn btn-outline-success waves-effect" data-dismiss="modal">Cancel</button>
         </div>
       </div>
     <!--/.Content-->

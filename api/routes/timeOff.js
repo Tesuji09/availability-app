@@ -36,10 +36,7 @@ router.get('/', jwtAuth, (req, res) => {
 })
 
 router.put('/', (req, res) => {
-  Promise.resolve()
-  .then(() => {
-    Request.findOneAndUpdate({_id: req.body.id}, {$set: {"status": req.body.status}})
-  })
+  Request.findOneAndUpdate({_id: req.body.id}, {$set: {"status": req.body.status, "acceptedBy": req.body.acceptedBy}})
   .then((data) => {
     res.json({ updated: data })
   })
