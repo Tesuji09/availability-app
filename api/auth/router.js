@@ -18,7 +18,7 @@ const localAuth = passport.authenticate('local', {
 const createAuthToken = function(user) {
   return jwt.sign({user}, process.env.JWT_SECRET, {
     subject: user.email,
-    expiresIn: process.env.JWT_EXPIRY,
+    expiresIn: '1h',
     algorithm: 'HS256'
   });
 };
