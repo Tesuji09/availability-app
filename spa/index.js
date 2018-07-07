@@ -39,16 +39,13 @@ const mockRequestData = [
 
 
 function auth() {
-  const email = $('#form1').val()
-  const password = $('#form2').val()
-  console.log({email, password})
+  const email = $('#form1').val();
+  const password = $('#form2').val();
   $.ajax('/login', {
     method: 'post',
     contentType: 'application/json',
     data: JSON.stringify({ email, password }),
     success: (data) => {
-      console.log('first ajax request');
-      console.log(data);
       storeJWT(data);
       if(data.user.role.includes('manager')){
         showStorePage(data);
@@ -59,7 +56,6 @@ function auth() {
       }
     },
     error: (error) => {
-      console.log('this error is running')
       $('#loginWarning').html('Invalid email or password');
     }
   });
@@ -90,7 +86,6 @@ function storeJWT(data) {
 
 
 function showEmployeePage(data) {
-  console.log('goooooo')
   $('#go').hide();
   $('#main').show();
   $('header').show();
@@ -111,7 +106,6 @@ function submitLogin() {
   })
 }
 function setEmployeeAvailability(data) {
-  console.log(data.user.availability[0].start)
   $(`#sunStart option:contains("${data.user.availability[0].start}")`).prop('selected',true);
   $(`#sunEnd option:contains("${data.user.availability[0].end}")`).prop('selected',true);
   $(`#monStart option:contains("${data.user.availability[1].start}")`).prop('selected',true);
@@ -185,7 +179,6 @@ function displayRequestData(rData) {
 }
 
 function requestHTML(request) {
-  console.log(request)
   return (`<tr class="employee" id ="${request._id}">
     <td>${request.name}</td>
     <td>${request.date}</td>
@@ -204,7 +197,6 @@ function requestButton(request) {
 
 function acceptRequest(id) {
   $('.accept-request').click( e => {
-    console.log(id)
     const authToken = localStorage.getItem('authToken');
     const name = localStorage.getItem('name');
     $.ajax('/request', {
@@ -215,7 +207,6 @@ function acceptRequest(id) {
       contentType: 'application/json',
       data: JSON.stringify({ id, acceptedBy: name, status: 'accepted' }),
       success: (data) => {
-        console.log(data)
         changeRequestState(name, id);
       }
     });
@@ -225,14 +216,12 @@ function acceptRequest(id) {
 function addConfirmation() {
   $('.acceptRequest').click(e => {
     const id = $(e.target).parents('.employee').attr('id');
-    console.log(id)
     $('.accept-request').off();
     acceptRequest(id);
   })
 }
 
 function changeRequestState(name, id) {
-  console.log(id)
   $(`#${id}`).children('#button').html(`${name}`)
 }
 
@@ -249,7 +238,6 @@ function submitRequest() {
     const allDay = $('#allDay').prop('checked');
     const startTime = $('#startTime').val();
     const endTime = $('#endTime').val();
-    console.log(startTime)
     sendRequest(date, allDay, startTime, endTime);
     clearRequestForm();
   })
@@ -262,7 +250,6 @@ function closeRequestForm() {
 function toggleAllDay() {
   $('#allDay').change(e => {
     if ($('#allDay').prop('checked')) {
-      console.log($('#allDay').prop('checked'))
       $('#startTime option:contains("N/A")').prop('selected', true);
       $('#startTime').attr('disabled', true);
       $('#endTime option:contains("N/A")').prop('selected', true);
@@ -309,7 +296,6 @@ function saveEmployeeAvailability() {
       contentType: 'application/json',
       data: JSON.stringify(newData),
       success: (data) => {
-        console.log(newData.availability)
       }
     });
   })
@@ -318,7 +304,6 @@ function saveEmployeeAvailability() {
 function checkState() {
   const data = JSON.parse(localStorage.getItem('data'))
   if(data !== null) {
-    console.log(`/user/employee/${localStorage.getItem('id')}`)
     $.ajax(`/user/employee/${localStorage.getItem('id')}`, {
       method: 'get',
       beforeSend: function(req) {
@@ -326,7 +311,7 @@ function checkState() {
       },
       success: (confirmation) => {
         if(data.user.role.includes('manager')){
-          console.log(data)
+
           showStorePage(data);
           getRequestData();
         } else {

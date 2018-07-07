@@ -9,7 +9,7 @@ const path = require('path');
 // const User = require('models/user.js')
 // const router = express.Router();
 
-const {router: AuthRouter, localStrategy, jwtStrategy} = require('./auth')
+const {router: AuthRouter, localStrategy, jwtStrategy} = require('./api/auth')
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DATABASE_URL, (err) => {
@@ -24,9 +24,9 @@ passport.use(jwtStrategy);
 
 const app = express();
 
-const userRouter = require('./routes/user');
-const loginRouter = require('./auth/router');
-const request = require('./routes/timeOff');
+const userRouter = require('./api/routes/user');
+const loginRouter = require('./api/auth/router');
+const request = require('./api/routes/timeOff');
 
 app.use(bodyParser.json());
 app.use(morgan('common'));
