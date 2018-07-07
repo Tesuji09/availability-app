@@ -4,6 +4,7 @@
   "description": "An app to keep track of employee's availability",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "api:start": "node api/server.js",
     "api:watch": "nodemon api/server.js",
     "test": "mocha --exit"
