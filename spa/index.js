@@ -300,7 +300,7 @@ function saveEmployeeAvailability() {
         console.log(data);
       },
       error: (error) => {
-        console.error(erro)
+        alert('server error please contact server admin')
       }
     });
   })
