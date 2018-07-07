@@ -21,7 +21,7 @@ router.post('/', jwtAuth, (req, res) => {
     return request.save();
   })
   .then((request)=>{
-    res.status(201).json({message: 'data uploaded'});
+    res.status(201).json(request);
   })
   .catch(error => {
     console.error(error)

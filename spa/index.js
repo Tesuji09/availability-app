@@ -179,12 +179,13 @@ function displayRequestData(rData) {
       return(requestHTML(request));
   });
   $('#TORequests').html(requests);
-  addRequestQuery();
+  addRequestDeleteQuery();
   addConfirmation();
   }
 }
 
 function requestHTML(request) {
+  console.log(request)
   return (`<tr class="employee" id ="${request._id}">
     <td>${request.name}</td>
     <td>${request.date}</td>
@@ -197,7 +198,7 @@ function requestButton(request) {
   if(!localStorage.getItem('role').includes('manager')) {
   return (request.status === 'accepted') ? request.acceptedBy : '<button type="button" class="btn btn-success acceptRequest" data-toggle="modal" data-target="#acceptModal">Cover Shift!</button> '
   } else {
-    return (request.status === 'accepted') ? request.acceptedBy : '<button type="button" class="btn btn-danger deleteRequest" data-toggle="modal" data-target="#deleteModal">Delete!</button> '
+    return (request.status === 'accepted') ? request.acceptedBy + '<button type="button" class="btn btn-danger deleteRequest" data-toggle="modal" data-target="#deleteModal">Delete!</button>' : '<button type="button" class="btn btn-danger deleteRequest" data-toggle="modal" data-target="#deleteModal">Delete!</button> '
 }
 }
 

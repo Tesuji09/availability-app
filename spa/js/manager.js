@@ -43,7 +43,7 @@ function showStorePage(data) {
   );
   $('#saveAvail').remove()
   addUser();
-  addUserQuery();
+  addUserDeleteQuery();
 }
 
 function addUser() {
@@ -64,7 +64,7 @@ function addUser() {
       success: (data) => {
         console.log(data);
         displayUser(data);
-        addUserQuery();
+        addUserDeleteQuery();
       }
    });
   });
@@ -86,10 +86,11 @@ function clearEmpForm() {
 function displayUser(user) {
   console.log('diplayUser is running')
   $('#avail').append(e => storeInformation(user));
+  showConfrimation()
 }
 function storeInformation(user) {
   return(
-    `<div class="col-lg-3 col-md-12 mb-4 employee" data-id="${user._id}" id="${user._id}">
+    `<div class="col-lg-3 col-md-12 mb-4 employee" data-id="${user._id}" data-email="${user.email}" id="${user._id}">
       <div class="card">
         <div class="card-header">
           <h4 class="btn btn-in w-100 text-muted" data-toggle="collapse" data-target="#${user.name.replace(/\s+/g, '')}Info" aria-expanded="false" aria-controls="${user.name.replace(/\s+/g, '')}Info">
@@ -106,7 +107,7 @@ function storeInformation(user) {
           <section><h6>Friday</h6> <p>${(user.availability[5].start !== 'unavailable') ? 'Start: ' + user.availability[5].start + ' to ' + user.availability[5].end : 'Unavailable'}</p></section><hr>
           <section><h6>Saturday</h6> <p>${(user.availability[6].start !== 'unavailable') ? 'Start: ' + user.availability[6].start + ' to ' + user.availability[6].end : 'Unavailable'}</p></section><hr>
           <button type="button" class="btn btn-danger btn-sm small queryDelete" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-minus-circle ml-2"></i> Remove User</button>
-          <button type="button" class="btn btn-outline-default btn-sm btn-rounded waves-effect changePW" data-email="${user.email}" id="${user._id}">Change Password</button>
+          <button type="button" class="btn btn-outline-default btn-sm btn-rounded waves-effect changePW" data-email="${user.email}" data-toggle="modal" data-target="#passwordModal">Change Password</button>
         </div>
         </div>
       </div>
@@ -120,26 +121,23 @@ function showStoreData(data) {
   })
   console.log(html)
   $('#avail').html(html)
+  showConfirmation()
   $('#welcome').html(`<strong>Welcome ${data.user.name}!</strong>`);
 }
 
-function addUserQuery() {
+function addUserDeleteQuery() {
   $('.queryDelete').click(e => {
+    $('#deleteType').html('employee');
     deleteUser();
-    const id = $(e.target).parents('.employee').data('id');
-    console.log(id)
-    addId(id);
-    console.log('this is the id: ' + id)
+    addId($(e.target).parents('.employee').data('id'));
   })
 }
 
-function addRequestQuery() {
+function addRequestDeleteQuery() {
   $('.deleteRequest').click(e => {
+    $('#deleteType').html('time off request');
     deleteRequest();
-    console.log($(e.target).parents('.employee').attr('id'))
-    const id = $(e.target).parents('.employee').attr('id');
-    addId(id);
-    console.log('this is the id: ' + id)
+    addId($(e.target).parents('.employee').attr('id'));
   })
 }
 
@@ -185,11 +183,36 @@ function deleteRequest() {
   })
 }
 
+function showConfirmation() {
+  $('.changePW').click(e => {
+    $('#infoEmail').html($(e.target).data('email'));
+    changePassword($(e.target).parents('.employee').attr('id'))
+  });
+}
 
 function removeHTML(id) {
   $(`#${id}`).remove();
 }
 
-function changePassword(user) {
-
+function changePassword(id) {
+  $('#updatePassword').click(e => {
+    const password = $('#newPassword').val();
+    const authToken = localStorage.getItem('authToken')
+    console.log($('#newPassword').val());
+    if(password.length < 5) {
+      $('#pwWarning').html('Password must be at least 5 characters long');
+    } else {
+      $.ajax('/user/edit/password', {
+        method: 'put',
+        beforeSend: function(req) {
+          req.setRequestHeader('Authorization', 'Bearer ' + authToken)
+        },
+        contentType: 'application/json',
+        data: JSON.stringify({ id, password }),
+        success: (data) => {
+          $('#passwordModal').modal('hide')
+        }
+      });
+    }
+  });
 }

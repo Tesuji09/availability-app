@@ -948,7 +948,7 @@
         <div class="modal-body">
           <div class="text-center">
             <i class="fa fa-close fa-4x mb-3 animated rotateIn"></i>
-            <p>Are you sure you want to Delete Employee?</p>
+            <p>Are you sure you want to delete <span id="deleteType">Employee</span>?</p>
           </div>
         </div>
 
@@ -1003,25 +1003,23 @@
                 <span aria-hidden="true" class="white-text">&times;</span>
             </button>
         </div>
-
         <!--Body-->
-        <form>
           <div class="modal-body">
             <div class="text-center">
+              <p class="red-text" id="pwWarning"></p>
               <div class="md-form mb-5">
-                <input type="password" id="updatePassword" class="form-control validate">
-                <label for="updatePassword">Change Password</label>
+                <input type="password" id="newPassword" class="form-control validate"></input>
+                <label for="newPassword">Change Password</label>
               </div>
             </div>
           </div>
 
           <!--Footer-->
           <div class="modal-footer justify-content-center">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Change Password</button>
+            <button type="button" class="btn btn-success" id="updatePassword">Change Password</button>
             <button type="button" class="btn btn-outline-success waves-effect" data-dismiss="modal">Cancel</button>
           </div>
         </div>
-      </form>
     <!--/.Content-->
     </div>
   </div>
