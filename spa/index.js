@@ -270,9 +270,9 @@ function clearRequestForm() {
 
 
 function saveEmployeeAvailability() {
-  const authToken = localStorage.getItem('authToken');
-  const id = localStorage.getItem('id');
   $('#saveAvail').click((e) => {
+    const authToken = localStorage.getItem('authToken');
+    const id = localStorage.getItem('id');
     function availabilityData() {
       return ([
         {start: $('#sunStart option:selected').val(), end: $('#sunEnd option:selected').val()},
