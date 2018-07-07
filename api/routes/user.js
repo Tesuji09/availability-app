@@ -73,7 +73,6 @@ router.delete('/delete/:id', jwtAuth, function(req, res, next) {
 router.put('/edit', function(req, res) {
   User.findById(req.body.id)
     .then(user => {
-      console.log(user)
       return User.findOneAndUpdate({_id: req.body.id}, {$set: { availability: req.body.availability }})
     })
     .then((user) => {

@@ -288,6 +288,7 @@ function saveEmployeeAvailability() {
       id,
       availability: availabilityData()
     }
+    console.log(newData)
       $.ajax('/user/edit', {
       method: 'put',
       beforeSend: function(req) {
@@ -296,6 +297,10 @@ function saveEmployeeAvailability() {
       contentType: 'application/json',
       data: JSON.stringify(newData),
       success: (data) => {
+        console.log(data);
+      },
+      error: (error) => {
+        console.error(erro)
       }
     });
   })
