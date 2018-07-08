@@ -4,11 +4,28 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+const nodemailer = require('nodemailer')
+const xoauth2 = require('xoauth2')
 
 const bodyParser = require('body-parser');
 
 const User = require('../models/user.js')
 const jwtAuth = passport.authenticate('jwt', {session: false});
+
+const smtpTransport = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        type: 'OAuth2',
+        user: 'neveragain8209@yahoo.com',
+        clientId: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
+        refreshToken: process.env.REFRESH_TOKEN,
+        accessToken: process.env.ACCESS_TOKEN,
+        expires: 1484314697598
+    }
+});
 
 
 router.post('/employee', jwtAuth, function(req, res) {
@@ -73,6 +90,23 @@ router.delete('/delete/:id', jwtAuth, function(req, res, next) {
 router.put('/edit', function(req, res) {
   User.findById(req.body.id)
     .then(user => {
+
+      const mailOptions = {
+        from: "csgopedagogy@gmail.com",
+        to: "neveragain8209@yahoo.com",
+        subject: "Hello",
+        generateTextFromHTML: true,
+        html: `<b>${user.name} has updated their availability</b>`
+      };
+
+      smtpTransport.sendMail(mailOptions, function(error, response) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(response);
+        }
+        smtpTransport.close();
+      });
       return User.findOneAndUpdate({_id: req.body.id}, {$set: { availability: req.body.availability }})
     })
     .then((user) => {
