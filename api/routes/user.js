@@ -10,7 +10,9 @@ const xoauth2 = require('xoauth2')
 const bodyParser = require('body-parser');
 
 const User = require('../models/user.js')
-const jwtAuth = passport.authenticate('jwt', {session: false});
+const Awesome = {
+  jwtAuth: passport.authenticate('jwt', {session: false})
+};
 
 const smtpTransport = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -18,7 +20,7 @@ const smtpTransport = nodemailer.createTransport({
     secure: true,
     auth: {
         type: 'OAuth2',
-        user: 'neveragain8209@yahoo.com',
+        user: 'csgopedagogy@gmail.com',
         clientId: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
         refreshToken: process.env.REFRESH_TOKEN,
@@ -28,7 +30,7 @@ const smtpTransport = nodemailer.createTransport({
 });
 
 
-router.post('/employee', jwtAuth, function(req, res) {
+router.post('/employee', Awesome.jwtAuth, function(req, res) {
   console.log('employee endpoint')
   Promise.resolve()
     .then(() => {
@@ -71,7 +73,7 @@ router.post('/admin', function(req, res, next) {
     })
 })
 
-router.delete('/delete/:id', jwtAuth, function(req, res, next) {
+router.delete('/delete/:id', Awesome.jwtAuth, function(req, res, next) {
   console.log(req.params.id)
   User.remove({_id: req.params.id})
     .exec()
@@ -138,7 +140,7 @@ router.put('/edit/password', function(req, res) {
     });
 });
 
-router.get('/store', jwtAuth, (req, res) => {
+router.get('/store', Awesome.jwtAuth, (req, res) => {
   User.find()
   .then((users) => {
     const rep = users.map(user => user.apiRep())
@@ -150,7 +152,7 @@ router.get('/store', jwtAuth, (req, res) => {
   });
 });
 
-router.get('/employee/:id', jwtAuth, (req, res) => {
+router.get('/employee/:id', Awesome.jwtAuth, (req, res) => {
   User.findOne({_id: req.params.id})
   .then((user) => {
       res.json({message: 'token is valid'})

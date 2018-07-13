@@ -1,7 +1,9 @@
 const chai = require('chai');
 const chaiHTTP = require('chai-http');
+const sinon = require('sinon');
+const passport = require('passport');
 
-const {app, runServer, closeServer} = require('../api/server.js');
+const {app, runServer, closeServer} = require('../server.js');
 const expect = chai.expect;
 
 chai.use(chaiHTTP)
@@ -33,15 +35,21 @@ describe('/users', () => {
       password: '123'
 
     }
+
     before(function() {
       return runServer();
     });
 
-    // before(function(){
-    //   return chai.request(app)
-    //   .post('/user/employee')
-    //   .send(newUser)
-    // })
+    before(function() {
+      const bypassAuth = sinon.stub(Awesome, 'jwtAuth').callsFake(() => {
+        return Promise.resolve({success: 'Token is valid'});
+      });
+      bypassAuth.callsArg(2);
+    })
+
+    afterEach(function() {
+      sinon.assert.calledOnce(bypassAuth)
+    })
 
     after(function() {
       return closeServer();
