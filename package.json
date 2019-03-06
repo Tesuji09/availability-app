@@ -1,16 +1,17 @@
 {
   "name": "availability-app",
+  "private": true,
   "version": "1.0.0",
-  "description": "An app to keep track of employee's availability",
-  "main": "server.js",
+  "description": "An app to keep track of employees' availability",
+  "author": "Joshua Zuo <neveragain8209@yahoo.com>",
+  "license": "ISC",
+  "main": "api/server.js",
   "scripts": {
-    "start": "node server.js",
-    "api:start": "node api/server.js",
-    "api:watch": "nodemon api/server.js",
+    "start": "npm run api:start",
+    "api:start": "node server.js",
+    "api:watch": "nodemon server.js",
     "test": "mocha --exit"
   },
-  "author": "Joshua Zuo",
-  "license": "ISC",
   "dependencies": {
     "bcrypt": "^2.0.1",
     "dotenv": "^6.0.0",
